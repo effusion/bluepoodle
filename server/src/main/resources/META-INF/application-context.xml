@@ -9,12 +9,13 @@
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-	<jpa:repositories base-package="ch.atos.tm.bluepoodle.server" />
+	<jpa:repositories base-package="ch.atos.tm.bluepoodle.repository" />
 
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
 	
+	<jpa:repositories base-package="ch.atos.tm.bluepoodle.repository" />
 
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
@@ -23,6 +24,7 @@
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 				<property name="database" value="POSTGRESQL" />
 				<property name="generateDdl" value="true" />
+				<property name="showSql" value="true" />
 			</bean>
 		</property>
 	</bean>
