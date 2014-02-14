@@ -1,5 +1,6 @@
 package ch.atos.tm.bluepoodle.domain;
 
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
@@ -11,6 +12,8 @@ public abstract class Person {
 	private Long personId;
 	private String userName;
 	private String lastName;
+	private String firstName;
+	@Column(unique=true)
 	private String email;
 	public String getUserName() {
 		return userName;
@@ -29,6 +32,12 @@ public abstract class Person {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 	
 	
