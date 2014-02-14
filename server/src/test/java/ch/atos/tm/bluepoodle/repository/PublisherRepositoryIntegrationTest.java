@@ -24,8 +24,26 @@ public class PublisherRepositoryIntegrationTest extends AbstractIntegrationTest 
 	}
 	
 	@Test
+	public void deletePublisher(){
+		publisherRepository.delete(3L);
+		assertNull(publisherRepository.findOne(3l));
+	}
+	
+	@Test
 	public void findPublisherByLastName(){
-		List<Publisher> publishers = publisherRepository.findPublisherByLastName("Heubeck");
-		assertEquals(1,publishers.size());
+		List<Publisher> publisher = publisherRepository.findPublisherByLastName("Heubeck");
+		assertEquals(1,publisher.size());
 	} 
+	
+	@Test
+	public void findPublisherByFirstName(){
+		List<Publisher> publisher = publisherRepository.findPublisherByFirstName("Pascal");
+		assertEquals(1,publisher.size());
+	}
+	
+	@Test
+	public void findPublisherByEmail(){
+		List<Publisher> publisher = publisherRepository.findPublisherByEmail("andreas.heubeck@atos.ch");
+		assertEquals(1,publisher.size());
+	}
 }
