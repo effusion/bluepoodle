@@ -39,6 +39,10 @@ public abstract class Person {
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-	
-	
+	public Long getPersonId() {
+		return personId;
+	}
+	public void setPersonId(Long personId) {
+		this.personId = personId;
+	}	
 }
