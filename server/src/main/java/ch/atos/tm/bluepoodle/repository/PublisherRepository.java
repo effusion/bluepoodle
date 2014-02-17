@@ -17,4 +17,7 @@ public interface PublisherRepository extends CrudRepository<Publisher, Long> {
 	
 	@Query("select p from Publisher p where p.email = ?1")
 	List<Publisher> findPublisherByEmail(String email);
+	
+	@Query("select p from Publisher p where p.userName = ?1")
+	List<Publisher> findPublisherByUserName(String username);
 }
