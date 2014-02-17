@@ -8,22 +8,15 @@ import javax.persistence.ManyToOne;
 
 @Embeddable
 public class SubscriptionCompositePK implements Serializable {
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 2946794011624729478L;
-	
-	
+
 	@ManyToOne()
 	@JoinColumn(name = "eventid")
 	private Event event;
-
 	@ManyToOne
 	@JoinColumn(name = "subscriberid")
 	private Subscriber subscriber;
-	
-	
 
 	public SubscriptionCompositePK(Event event, Subscriber subscriber) {
 		super();
@@ -46,6 +39,5 @@ public class SubscriptionCompositePK implements Serializable {
 	public void setSubscriber(Subscriber subscriber) {
 		this.subscriber = subscriber;
 	}
-	
-	
+
 }

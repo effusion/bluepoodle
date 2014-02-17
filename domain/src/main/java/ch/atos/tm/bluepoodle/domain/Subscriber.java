@@ -6,8 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Subscriber extends Person{
-		
+public class Subscriber extends Person {
+
 	@OneToMany(mappedBy = "pk.subscriber")
 	private Set<Subscription> subscriptions;
 

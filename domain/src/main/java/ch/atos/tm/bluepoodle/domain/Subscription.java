@@ -5,12 +5,11 @@ import javax.persistence.Entity;
 
 @Entity
 public class Subscription {
-	
+
 	@EmbeddedId
 	private SubscriptionCompositePK pk;
-	
 	private String comment;
-	
+
 	public String getComment() {
 		return comment;
 	}
@@ -33,5 +32,5 @@ public class Subscription {
 
 	public void setSubscriber(Subscriber subscriber) {
 		this.pk.setSubscriber(subscriber);
-	}	
+	}
 }
