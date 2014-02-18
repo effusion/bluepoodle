@@ -24,7 +24,9 @@ public class EventType {
 	private Set<Event> events;
 
 	@ManyToMany
-	@JoinTable(name = "eventtype_location_assoc", joinColumns = { @JoinColumn(name = "eventtypeid", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "locationid", nullable = false, updatable = false) })
+	@JoinTable(name = "eventtype_location_assoc", 
+		joinColumns = { @JoinColumn(name = "eventtypeid", nullable = false, updatable = false) },
+		inverseJoinColumns = { @JoinColumn(name = "locationid", nullable = false, updatable = false) })
 	private Set<Location> location;
 
 	public Publisher getPublisher() {
