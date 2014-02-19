@@ -1,6 +1,7 @@
 package ch.atos.tm.bluepoodle.repository;
 
 import static org.testng.AssertJUnit.*;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,25 +37,33 @@ public class PublisherRepositoryIntegrationTest extends AbstractIntegrationTest 
 	
 	@Test
 	public void findPublisherByLastName(){
-		List<Publisher> publisher = publisherRepository.findPublisherByLastName("Heubeck");
+		String lastName = "Heubeck";
+		List<Publisher> publisher = publisherRepository.findByLastName(lastName);
 		assertEquals(1,publisher.size());
+		assertEquals(lastName, publisher.get(0).getLastName());
 	}
 	
 	@Test
 	public void findPublisherByUserName(){
-		List<Publisher> publisher = publisherRepository.findPublisherByUserName("heuby");
+		String username = "heuby";
+		List<Publisher> publisher = publisherRepository.findByUserName(username);
 		assertEquals(1,publisher.size());
+		assertEquals(username, publisher.get(0).getUserName());
 	} 
 	
 	@Test
 	public void findPublisherByFirstName(){
-		List<Publisher> publisher = publisherRepository.findPublisherByFirstName("Pascal");
+		String firstName = "Pascal";
+		List<Publisher> publisher = publisherRepository.findByFirstName(firstName);
 		assertEquals(1,publisher.size());
+		assertEquals(firstName, publisher.get(0).getFirstName());
 	}
 	
 	@Test
 	public void findPublisherByEmail(){
-		List<Publisher> publisher = publisherRepository.findPublisherByEmail("andreas.kuhtz@atos.ch");
+		String email = "andreas.kuhtz@atos.ch";
+		List<Publisher> publisher = publisherRepository.findByEmail(email);
 		assertEquals(1,publisher.size());
+		assertEquals(email, publisher.get(0).getEmail());
 	}
 }
