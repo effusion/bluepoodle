@@ -12,6 +12,7 @@ import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.transaction.annotation.Transactional;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 @ContextConfiguration(locations={"classpath:application-context-test.xml"})
@@ -28,12 +29,14 @@ public abstract class AbstractIntegrationTest extends AbstractTestNGSpringContex
 	 */
 	@BeforeClass
 	public void populateDatabase() throws SQLException {
-
 		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
 		populator.addScript(new ClassPathResource("data.sql"));
+		executePopulator(populator);
+	}
 
+	private void executePopulator(ResourceDatabasePopulator populator)
+			throws SQLException {
 		Connection connection = null;
-
 		try {
 			connection = DataSourceUtils.getConnection(dataSource);
 			populator.populate(connection);
@@ -42,5 +45,13 @@ public abstract class AbstractIntegrationTest extends AbstractTestNGSpringContex
 				DataSourceUtils.releaseConnection(connection, dataSource);
 			}
 		}
+	}
+	@AfterClass
+	public void deleteTables() throws SQLException{
+		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
+		populator.setContinueOnError(false);
+		populator.setIgnoreFailedDrops(false);
+		populator.addScript(new ClassPathResource("droptables.sql"));
+		executePopulator(populator);
 	}
 }
