@@ -32,7 +32,7 @@
 		<!-- load the schema -->
 		<jdbc:script location="classpath:/schema.sql" />
 		<!-- load the test-data -->
-		<jdbc:script location="classpath:/data.sql" />
+		<jdbc:script location="classpath:/test-data.sql" />
     </jdbc:embedded-database>    
 	
 </beans>
