@@ -29,9 +29,9 @@ public abstract class AbstractIntegrationTest extends AbstractTestNGSpringContex
 	 */
 	@BeforeClass
 	public void populateDatabase() throws SQLException {
-		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
+		/*ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
 		populator.addScript(new ClassPathResource("data.sql"));
-		executePopulator(populator);
+		executePopulator(populator);*/
 	}
 
 	private void executePopulator(ResourceDatabasePopulator populator)
@@ -48,10 +48,10 @@ public abstract class AbstractIntegrationTest extends AbstractTestNGSpringContex
 	}
 	@AfterClass
 	public void deleteTables() throws SQLException{
-		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
+		/*ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
 		populator.setContinueOnError(false);
 		populator.setIgnoreFailedDrops(false);
 		populator.addScript(new ClassPathResource("droptables.sql"));
-		executePopulator(populator);
+		executePopulator(populator);*/
 	}
 }

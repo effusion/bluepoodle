@@ -23,11 +23,13 @@
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 				<property name="database" value="HSQL" />
 				<property name="generateDdl" value="true" />
-				<property name="showSql" value="true"></property>
+				<property name="showSql" value="true" />
 			</bean>
 		</property>
 	</bean>
 
-	<jdbc:embedded-database id="dataSource" type="HSQL" />
+	<jdbc:embedded-database id="dataSource" type="HSQL">
+		<jdbc:script location="classpath:/schema.sql" />
+    </jdbc:embedded-database>    
 	
 </beans>
