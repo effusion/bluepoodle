@@ -710,7 +710,7 @@
 			<dependency>
 				<groupId>org.springframework.data</groupId>
 				<artifactId>spring-data-jpa</artifactId>
-				<version>1.4.3.RELEASE</version>
+				<version>${spring-data-jpa.version}</version>
 			</dependency>
 
 			<dependency>
@@ -862,7 +862,7 @@
 
 		<skipTests>false</skipTests>
 		<skipITs>false</skipITs>
-		<testng.listeners>org.testng.reporters.XMLReporter,org.testng.reporters.jq.Main,org.testng.reporters.JUnitReportReporter</testng.listeners>
+		<testng.listeners>org.testng.reporters.XMLReporter,org.testng.reporters.jq.Main,org.testng.reporters.JUnitXMLReporter</testng.listeners>
 
 		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
 
@@ -901,8 +901,10 @@
 		-->
 		<springldap.version>1.3.1.RELEASE</springldap.version>
 		<spring-binding.version>1.0.6</spring-binding.version>
+		<spring-data-jpa.version>1.4.4.RELEASE</spring-data-jpa.version>
+		
 
-		<querydsl.version>2.9.0</querydsl.version>
+		<querydsl.version>3.3.1</querydsl.version>
 		<!-- Hibernate / JPA -->
 		<hibernate.version>4.3.0.Final</hibernate.version>
 

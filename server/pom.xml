@@ -107,8 +107,29 @@
 			<artifactId>testng</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- 
+		<dependency>
+		    <groupId>org.ops4j.orient</groupId>
+		    <artifactId>orient-spring-tx</artifactId>
+		    <version>${ops4j.orient.version}</version>
+			<scope>test</scope>
+		</dependency>		
+		<dependency>
+		    <groupId>com.orientechnologies</groupId>
+		    <artifactId>orientdb-server</artifactId>
+		    <version>${orientdb-server.version}</version>
+			<scope>test</scope>
+		</dependency>
+		 -->		
 	</dependencies>	
 	
+	<properties>
+
+		<orientdb.version>1.5.1</orientdb.version>
+		<orientdb-server.version>1.6.4</orientdb-server.version>
+		<ops4j.orient.version>0.2.0</ops4j.orient.version>
+	</properties>
 	
 	<build>
 		<plugins>
@@ -147,6 +168,23 @@
 					<type>CREATE</type>
 				  </configuration>
 				</execution>
+				<!-- 
+				<execution>
+					<id>orient</id>
+				  <goals>
+					<goal>export</goal>
+				  </goals>
+				  <configuration>
+					<driverClassName>com.orientechnologies.orient.jdbc.OrientJdbcDriver</driverClassName>
+					<hibernateDialect>org.hibernate.dialect.H2Dialect</hibernateDialect>
+					<url><![CDATA[jdbc:orient:remote:local:target/test]]></url>
+					<username>admin</username>
+					<password>admin</password>
+					<outputFile>${project.build.directory}/test-classes/schema-orient.sql</outputFile>
+					<type>CREATE</type>
+				  </configuration>
+				</execution>
+				 -->
 			  </executions>
 				<dependencies>	
 					<dependency>
