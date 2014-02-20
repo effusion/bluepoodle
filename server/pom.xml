@@ -130,6 +130,7 @@
 				<username>sa</username>
 				<password></password>
 				<outputFile>${project.build.directory}/test-classes/schema.sql</outputFile>
+				<type>CREATE</type>
 			  </configuration>
 				<dependencies>	
 					<dependency>
