@@ -13,6 +13,8 @@ public class EventTypeRepositoryIntegrationTest extends AbstractIntegrationTest{
 	@Test
 	public void savePublisher() {
 		EventType eventType = new EventType();
+		eventType.setName("Bootcamp");
 		eventTypeRepository.save(eventType);
 	}
+	
 }
