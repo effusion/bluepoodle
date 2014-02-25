@@ -164,7 +164,7 @@
 					<url><![CDATA[jdbc:postgresql://tm-database.ch902.my-it-solutions.net:5432/bluepoodledb]]></url>
 					<username>bluepoodle-user</username>
 					<password>poodle</password>
-					<outputFile>${project.build.directory}/test-classes/schema-postgres.sql</outputFile>
+					<outputFile>${project.build.directory}/sql-schemas/schema-postgres.sql</outputFile>
 					<type>CREATE</type>
 				  </configuration>
 				</execution>
