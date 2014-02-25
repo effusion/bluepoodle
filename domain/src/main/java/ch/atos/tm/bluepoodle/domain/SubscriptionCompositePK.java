@@ -15,7 +15,7 @@ public class SubscriptionCompositePK implements Serializable {
 	@JoinColumn(name = "eventid")
 	private Event event;
 	@ManyToOne
-	@JoinColumn(name = "subscriberid")
+	@JoinColumn(name = "personid")
 	private Subscriber subscriber;
 
 	public SubscriptionCompositePK(Event event, Subscriber subscriber) {
