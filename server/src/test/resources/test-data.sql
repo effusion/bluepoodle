@@ -17,4 +17,7 @@ insert into eventtype_location_assoc (locationid, eventtypeid) values (1, 1)
 insert into eventtype_location_assoc (locationid, eventtypeid) values (3, 1)
 insert into eventtype_location_assoc (locationid, eventtypeid) values (2, 2)
 
-insert into  event (eventid, eventtype_eventtypeid, location_locationid, publisher_personid) values (1, 1, 1, 2)
+insert into  event (eventid, name, eventtype_eventtypeid, location_locationid, publisher_personid) values (1, 'JavaOne', 1, 1, 2)
+insert into  event (eventid, name, eventtype_eventtypeid, location_locationid, publisher_personid) values (2, 'W-JAX', 1, 3, 2)
+
+insert into subscription (personid, eventid, comment) values (2, 2, 'Some text.')
