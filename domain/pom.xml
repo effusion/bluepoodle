@@ -93,7 +93,7 @@
 				  <configuration>
 					<driverClassName>org.hsqldb.jdbcDriver</driverClassName>
 					<hibernateDialect>org.hibernate.dialect.HSQLDialect</hibernateDialect>
-					<url><![CDATA[jdbc:hsqldb:target/db/bluepoodle;shutdown=true]]></url>
+					<url><![CDATA[jdbc:hsqldb:mem:bluepoodle;shutdown=true]]></url>
 					<username>sa</username>
 					<password></password>
 					<outputFile>${project.build.directory}/schema/schema-hsqldb.sql</outputFile>
