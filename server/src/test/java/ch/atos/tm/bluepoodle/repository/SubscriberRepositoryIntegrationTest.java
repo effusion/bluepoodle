@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.Test;
 
+import ch.atos.tm.bluepoodle.AbstractIntegrationTest;
 import ch.atos.tm.bluepoodle.domain.Subscriber;
 
 

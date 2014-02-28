@@ -1,4 +1,4 @@
-package ch.atos.tm.bluepoodle.repository;
+package ch.atos.tm.bluepoodle;
 
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
