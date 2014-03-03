@@ -1,0 +1,1 @@
+https://localhost:8443/bluepoodle-rest/api/foos
