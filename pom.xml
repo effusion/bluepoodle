@@ -754,6 +754,11 @@
 				<version>1.4</version>
 			</dependency>
 			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>3.1</version>
+			</dependency>
+			<dependency>
 				<groupId>org.postgresql</groupId>
 				<artifactId>postgresql</artifactId>
 				<version>9.2-1004-jdbc4</version>
@@ -770,6 +775,29 @@
 				<version>1.3</version>
 			</dependency>
 
+			<!-- slf4j -->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jcl-over-slf4j</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>${log4j.version}</version>
+			</dependency>
+
+			
 			<!-- testing -->
 			<dependency>
 				<groupId>org.testng</groupId>
@@ -808,6 +836,7 @@
 	<modules>
 		<module>domain</module>
 		<module>server</module>
+		<module>frontend</module>
 	</modules>
 
 	<pluginRepositories>
