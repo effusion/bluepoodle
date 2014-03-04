@@ -8,22 +8,23 @@
 
 	<display-name>BluePoodle Frontend Spring REST</display-name>
 	
-	<!--
 	<context-param>
         <param-name>log4jConfigLocation</param-name>
         <param-value>/WEB-INF/classes/log4j-tomcat.xml</param-value>
-  	</context-param>    
-	-->
+  	</context-param>
 	
 	<!-- Spring root -->
-	<!--
 	<context-param>
 		<param-name>contextClass</param-name>
 		<param-value>
 			org.springframework.web.context.support.AnnotationConfigWebApplicationContext
 		</param-value>
 	</context-param>	
-	-->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>ch.atos.tm.bluepoodle.frontend.springrest.spring</param-value>
+	</context-param>
+	<!--
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
@@ -31,13 +32,12 @@
 			classpath:applicationContext-security.xml
 		</param-value>
 	</context-param>
+	-->
 	
 	<!-- applies log4j configuration -->
-	<!--
 	<listener>
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
 	</listener>
-	-->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>

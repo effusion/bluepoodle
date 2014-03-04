@@ -2,22 +2,34 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
     xmlns:sec="http://www.springframework.org/schema/security"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="
 	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd 
     http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-	<http use-expressions="true" entry-point-ref="restAuthenticationEntryPoint">
-        <intercept-url pattern="/api/**" access="isAuthenticated()" />
+	<context:component-scan base-package="ch.atos.tm.bluepoodle.frontend.springrest.security" />
 
-        <form-login 
+	<!--
+	<http use-expressions="true" entry-point-ref="restAuthenticationEntryPoint" >
+        <intercept-url pattern="/api/**" access="isAuthenticated()" />
+		<intercept-url pattern="/api/admin/**" access="ROLE_ADMIN"/>
+
+        <form-login
 			authentication-success-handler-ref="mySuccessHandler" 
 			authentication-failure-handler-ref="myFailureHandler" />
 
         <logout />
     </http>
-
     <beans:bean id="mySuccessHandler" class="ch.atos.tm.bluepoodle.frontend.springrest.security.MySavedRequestAwareAuthenticationSuccessHandler" />
     <beans:bean id="myFailureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler" />
+	-->
+
+	<http use-expressions="true" entry-point-ref="restAuthenticationEntryPoint" >
+		<intercept-url pattern="/api/**" access="isAuthenticated()" />
+		<http-basic />
+	</http>
+	
     
     <authentication-manager alias="authenticationManager">
 		<authentication-provider>

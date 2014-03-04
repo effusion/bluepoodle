@@ -29,7 +29,8 @@
   <!-- FileAppender                                                        -->
   <!-- ******************************************************************* -->
   <appender name="FileAppender" class="org.apache.log4j.RollingFileAppender">
-    <param name="File" value="${catalina.home}/logs/bluepoodle-spring-rest.log"/>
+    <!--param name="File" value="${catalina.home}/logs/bluepoodle-spring-rest.log"/-->
+    <param name="File" value="bluepoodle-spring-rest.log"/>
     <param name="Append" value="false"/>
 
     <layout class="org.apache.log4j.PatternLayout">
@@ -97,6 +98,10 @@
     <level value="warn"/>
   </logger>
 
+   <logger name="org.springframework">
+      <level value="debug"/>
+  </logger>
+  
   <!-- Log application messages -->
    <logger name="ch.atos.tm.bluepoodles">
       <level value="debug"/>
