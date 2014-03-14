@@ -11,13 +11,16 @@ insert into eventtype (eventtypeid, name, publisher_personid) values (2, 'Tech-T
 
 insert into location (locationid, name, description) values (1, 'Moscone Center', 'San Francisco')
 insert into location (locationid, name, description) values (2, 'Technopark', 'Zürich')
-insert into location (locationid, name, description) values (3, 'The Westin Grand Hotel', '')
+insert into location (locationid, name, description) values (3, 'The Westin Grand Hotel', 'München')
+insert into location (locationid, name, description) values (4, 'Estrel' , 'Berlin')
+insert into location (locationid, name, description) values (5, 'Shilcity' , 'Zürich')
 
 insert into eventtype_location_assoc (locationid, eventtypeid) values (1, 1)
 insert into eventtype_location_assoc (locationid, eventtypeid) values (3, 1)
 insert into eventtype_location_assoc (locationid, eventtypeid) values (2, 2)
 
-insert into  event (eventid, name, eventtype_eventtypeid, location_locationid, publisher_personid) values (1, 'JavaOne', 1, 1, 2)
-insert into  event (eventid, name, eventtype_eventtypeid, location_locationid, publisher_personid) values (2, 'W-JAX', 1, 3, 2)
+insert into event (eventid, name, eventtype_eventtypeid, location_locationid, publisher_personid) values (1, 'JavaOne', 1, 1, 2)
+insert into event (eventid, name, eventtype_eventtypeid, location_locationid, publisher_personid) values (2, 'W-JAX', 1, 3, 2)
+insert into event (eventid, name, eventtype_eventtypeid, location_locationid, publisher_personid) values (3, 'Jazoon', 1, 5, 2)
 
 insert into subscription (personid, eventid, comment) values (2, 2, 'Some text.')
