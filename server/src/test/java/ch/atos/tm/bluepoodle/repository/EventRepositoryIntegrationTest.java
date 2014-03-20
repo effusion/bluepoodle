@@ -47,6 +47,6 @@ public class EventRepositoryIntegrationTest extends AbstractIntegrationTest {
 		BooleanExpression isEventType = qEvent.eventType.name.eq("Entwicklerkonferenz");
 		Iterable<Event> result = eventRepository.findAll(isEventType);
 		List<Event> events = Lists.newArrayList(result);
-		assertEquals(2, events.size());
+		assertEquals(3, events.size());
 	}
 }
