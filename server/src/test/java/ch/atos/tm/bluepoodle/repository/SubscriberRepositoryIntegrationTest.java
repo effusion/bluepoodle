@@ -1,7 +1,6 @@
 package ch.atos.tm.bluepoodle.repository;
 
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertNull;
+import org.testng.Assert;
 
 import java.util.List;
 
@@ -34,38 +33,38 @@ public class SubscriberRepositoryIntegrationTest extends AbstractIntegrationTest
 		subscriber.setFirstName("Me");			
 		subscriber = subscriberRepository.save(subscriber);
 		subscriberRepository.delete(subscriber.getPersonId());
-		assertNull(subscriberRepository.findOne(subscriber.getPersonId()));
+		Assert.assertNull(subscriberRepository.findOne(subscriber.getPersonId()));
 	}
 	
 	@Test
 	public void findPublisherByLastName(){
 		String lastName = "Goebel";
 		List<Subscriber> subscriber = subscriberRepository.findByLastName(lastName);
-		assertEquals(1,subscriber.size());
-		assertEquals(lastName, subscriber.get(0).getLastName());
+		Assert.assertEquals(1,subscriber.size());
+		Assert.assertEquals(lastName, subscriber.get(0).getLastName());
 	}
 	
 	@Test
 	public void findPublisherByUserName(){
 		String username = "dani";
 		List<Subscriber> subscriber = subscriberRepository.findByUserName(username);
-		assertEquals(1,subscriber.size());
-		assertEquals(username, subscriber.get(0).getUserName());
+		Assert.assertEquals(1,subscriber.size());
+		Assert.assertEquals(username, subscriber.get(0).getUserName());
 	} 
 	
 	@Test
 	public void findPublisherByFirstName(){
 		String firstName = "Patrick";
 		List<Subscriber> subscriber = subscriberRepository.findByFirstName(firstName);
-		assertEquals(1,subscriber.size());
-		assertEquals(firstName, subscriber.get(0).getFirstName());
+		Assert.assertEquals(1,subscriber.size());
+		Assert.assertEquals(firstName, subscriber.get(0).getFirstName());
 	}
 	
 	@Test
 	public void findPublisherByEmail(){
 		String email = "martin.goebel@atos.ch";
 		List<Subscriber> subscriber = subscriberRepository.findByEmail(email);
-		assertEquals(1,subscriber.size());
-		assertEquals(email, subscriber.get(0).getEmail());
+		Assert.assertEquals(1,subscriber.size());
+		Assert.assertEquals(email, subscriber.get(0).getEmail());
 	}
 }

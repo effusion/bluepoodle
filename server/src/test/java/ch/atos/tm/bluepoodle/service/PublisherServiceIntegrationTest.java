@@ -1,7 +1,6 @@
 package ch.atos.tm.bluepoodle.service;
 
-import static org.testng.AssertJUnit.assertNull;
-import static org.testng.AssertJUnit.assertEquals;
+import org.testng.Assert;
 
 import java.util.List;
 
@@ -40,7 +39,7 @@ public class PublisherServiceIntegrationTest extends AbstractIntegrationTest {
 	@Test
 	public void findAllEventsForOnePublisher(){
 		List<Event> events = publisherService.findAllEvents(publisher);
-		assertEquals(2,events.size());
+		Assert.assertEquals(2,events.size());
 	}
 	
 	@Test
@@ -54,13 +53,13 @@ public class PublisherServiceIntegrationTest extends AbstractIntegrationTest {
 	@Test
 	public void findAllEventTypeForOnePublisher(){
 		List<EventType> eventsTypes = publisherService.findAllEventTypes(publisher);
-		assertEquals(2,eventsTypes.size());
+		Assert.assertEquals(2,eventsTypes.size());
 	}
 	
 	@Test
 	public void deleteEvent(){
 		publisherService.deleteEvent(eventRepository.findOne(3L));
-		assertNull(eventRepository.findOne(3L));
+		Assert.assertNull(eventRepository.findOne(3L));
 	}
 	
 	

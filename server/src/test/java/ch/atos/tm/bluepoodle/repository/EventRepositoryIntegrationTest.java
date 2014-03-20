@@ -1,6 +1,6 @@
 package ch.atos.tm.bluepoodle.repository;
 
-import static org.testng.AssertJUnit.assertEquals;
+import org.testng.Assert;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -37,8 +37,8 @@ public class EventRepositoryIntegrationTest extends AbstractIntegrationTest {
 	public void findEventByName(){
 		String name = "W-JAX";
 		List<Event> event = eventRepository.findByName(name);
-		assertEquals(1,event.size());
-		assertEquals(name, event.get(0).getName());
+		Assert.assertEquals(1,event.size());
+		Assert.assertEquals(name, event.get(0).getName());
 	}
 	
 	@Test
@@ -47,6 +47,6 @@ public class EventRepositoryIntegrationTest extends AbstractIntegrationTest {
 		BooleanExpression isEventType = qEvent.eventType.name.eq("Entwicklerkonferenz");
 		Iterable<Event> result = eventRepository.findAll(isEventType);
 		List<Event> events = Lists.newArrayList(result);
-		assertEquals(3, events.size());
+		Assert.assertEquals(3, events.size());
 	}
 }

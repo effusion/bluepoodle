@@ -1,6 +1,6 @@
 package ch.atos.tm.bluepoodle.repository;
 
-import static org.testng.AssertJUnit.assertEquals;
+import org.testng.Assert;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class LocationRepositoryIntegrationTest extends AbstractIntegrationTest {
 	public void findLocationByName(){
 		String name = "Technopark";
 		List<Location> location = locationRepository.findByName(name);
-		assertEquals(1,location.size());
-		assertEquals(name, location.get(0).getName());
+		Assert.assertEquals(1,location.size());
+		Assert.assertEquals(name, location.get(0).getName());
 	}
 }

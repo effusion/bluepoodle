@@ -1,7 +1,6 @@
 package ch.atos.tm.bluepoodle.repository;
 
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertNull;
+import org.testng.Assert;
 
 import java.util.List;
 
@@ -37,39 +36,39 @@ public class PublisherRepositoryIntegrationTest extends AbstractIntegrationTest 
 		publisher.setFirstName("Me");			
 		publisher = publisherRepository.save(publisher);
 		publisherRepository.delete(publisher.getPersonId());
-		assertNull(publisherRepository.findOne(publisher.getPersonId()));
+		Assert.assertNull(publisherRepository.findOne(publisher.getPersonId()));
 	}
 	
 	@Test
 	public void findPublisherByLastName(){
 		String lastName = "Heubeck";
 		List<Publisher> publisher = publisherRepository.findByLastName(lastName);
-		assertEquals(1,publisher.size());
-		assertEquals(lastName, publisher.get(0).getLastName());
+		Assert.assertEquals(1,publisher.size());
+		Assert.assertEquals(lastName, publisher.get(0).getLastName());
 	}
 	
 	@Test
 	public void findPublisherByUserName(){
 		String username = "heuby";
 		List<Publisher> publisher = publisherRepository.findByUserName(username);
-		assertEquals(1,publisher.size());
-		assertEquals(username, publisher.get(0).getUserName());
+		Assert.assertEquals(1,publisher.size());
+		Assert.assertEquals(username, publisher.get(0).getUserName());
 	} 
 	
 	@Test
 	public void findPublisherByFirstName(){
 		String firstName = "Pascal";
 		List<Publisher> publisher = publisherRepository.findByFirstName(firstName);
-		assertEquals(1,publisher.size());
-		assertEquals(firstName, publisher.get(0).getFirstName());
+		Assert.assertEquals(1,publisher.size());
+		Assert.assertEquals(firstName, publisher.get(0).getFirstName());
 	}
 	
 	@Test
 	public void findPublisherByEmail(){
 		String email = "andreas.kuhtz@atos.ch";
 		List<Publisher> publisher = publisherRepository.findByEmail(email);
-		assertEquals(1,publisher.size());
-		assertEquals(email, publisher.get(0).getEmail());
+		Assert.assertEquals(1,publisher.size());
+		Assert.assertEquals(email, publisher.get(0).getEmail());
 	}
 
 	@Test
@@ -79,7 +78,7 @@ public class PublisherRepositoryIntegrationTest extends AbstractIntegrationTest 
 		BooleanExpression emailName = qPublisher.email.eq(email);
 		Iterable<Publisher> publishers = publisherRepository.findAll(emailName);
 		List<Publisher> publisher = (List<Publisher>) publishers;
-		assertEquals(1, publisher.size());
-		assertEquals(email, publisher.get(0).getEmail());
+		Assert.assertEquals(1, publisher.size());
+		Assert.assertEquals(email, publisher.get(0).getEmail());
 	}
 }
