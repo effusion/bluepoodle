@@ -81,9 +81,9 @@
 		      </executions>
 		    </plugin>
 			<plugin>
-			  <groupId>de.juplo</groupId>
+			  <groupId>net.atos.de.juplo</groupId>
 			  <artifactId>hibernate4-maven-plugin</artifactId>
-			  <version>1.0.4-SNAPSHOT</version>
+			  <version>1.0.4.rc1</version>
 			  <executions>
 				<execution>
 					<id>hsqldb</id>
