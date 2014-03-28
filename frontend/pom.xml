@@ -8,7 +8,7 @@
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>bluepoodle-frontent</artifactId>
+	<artifactId>bluepoodle-frontend</artifactId>
 	<packaging>pom</packaging>
 
 	<name>BluePoodle frontend modules</name>

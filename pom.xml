@@ -696,6 +696,11 @@
 			</dependency>
 			<dependency>
 				<groupId>ch.atos.tm.bluepoodle</groupId>
+				<artifactId>bluepoodle-frontend-spring-rest</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ch.atos.tm.bluepoodle</groupId>
 				<artifactId>bluepoodle-server</artifactId>
 				<version>${project.version}</version>
 			</dependency>
