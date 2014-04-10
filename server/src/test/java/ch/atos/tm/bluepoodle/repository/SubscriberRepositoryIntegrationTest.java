@@ -5,12 +5,13 @@ import org.testng.Assert;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.testng.annotations.Test;
 
 import ch.atos.tm.bluepoodle.AbstractIntegrationTest;
 import ch.atos.tm.bluepoodle.domain.Subscriber;
 
-
+@Transactional
 public class SubscriberRepositoryIntegrationTest extends AbstractIntegrationTest {
 	
 	@Autowired
@@ -32,8 +33,8 @@ public class SubscriberRepositoryIntegrationTest extends AbstractIntegrationTest
 		subscriber.setLastName("Delete");
 		subscriber.setFirstName("Me");			
 		subscriber = subscriberRepository.save(subscriber);
-		subscriberRepository.delete(subscriber.getPersonId());
-		Assert.assertNull(subscriberRepository.findOne(subscriber.getPersonId()));
+		subscriberRepository.delete(subscriber.getId());
+		Assert.assertNull(subscriberRepository.findOne(subscriber.getId()));
 	}
 	
 	@Test

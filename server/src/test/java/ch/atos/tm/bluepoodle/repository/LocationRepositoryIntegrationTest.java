@@ -5,11 +5,13 @@ import org.testng.Assert;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.testng.annotations.Test;
 
 import ch.atos.tm.bluepoodle.AbstractIntegrationTest;
 import ch.atos.tm.bluepoodle.domain.Location;
 
+@Transactional
 public class LocationRepositoryIntegrationTest extends AbstractIntegrationTest {
 	
 	@Autowired

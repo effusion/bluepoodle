@@ -2,6 +2,8 @@ package ch.atos.tm.bluepoodle.service.impl;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +18,13 @@ import ch.atos.tm.bluepoodle.repository.EventRepository;
 import ch.atos.tm.bluepoodle.repository.EventTypeRepository;
 import ch.atos.tm.bluepoodle.service.PublisherService;
 
-import com.mysema.query.types.expr.BooleanExpression;
-import com.google.common.collect.Lists;
+import com.mysema.query.jpa.impl.JPAQuery;
 @Service
 @Transactional
 public class PublisherServiceImpl implements PublisherService {
 	
+	@PersistenceContext
+	private EntityManager em;	
 	@Autowired
 	private EventRepository eventRepository;
 	@Autowired
@@ -29,25 +32,33 @@ public class PublisherServiceImpl implements PublisherService {
 	
 	@Override
 	public List<Event> findAllEvents(Publisher publisher) {
-		QEvent qevent = QEvent.event;
-		BooleanExpression query = qevent.publisher.eq(publisher);
-		return Lists.newArrayList(eventRepository.findAll(query));
+		QEvent event = QEvent.event;
+		JPAQuery query = new JPAQuery(em);
+		return query.distinct().from(event).where(event.publisher.eq(publisher)).list(event);
 	}
 
 	@Override
-	public void save(Event event) {
-		eventRepository.save(event);
+	public Event update(Event event) {
+		return eventRepository.save(event);
 	}
 
 	@Override
 	public List<EventType> findAllEventTypes(Publisher publisher) {
-		QEventType qeventType = QEventType.eventType;
-		BooleanExpression query  = qeventType.publisher.eq(publisher);
-		return Lists.newArrayList(eventTypeRepository.findAll(query));
+		QEventType eventType = QEventType.eventType;
+		JPAQuery query = new JPAQuery(em);
+		return query.distinct().from(eventType).where(eventType.publisher.eq(publisher)).list(eventType);
 	}
 
 	@Override
-	public void deleteEvent(Event event) {
-		eventRepository.delete(event);		
+	public void deleteEvent(Event event, Publisher publisher) {
+		if(event.getPublisher().equals(publisher)){
+			eventRepository.delete(event.getId());
+		}
+	}
+
+	@Override
+	public Event createEvent(Event event) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

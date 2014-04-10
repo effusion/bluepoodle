@@ -1,10 +1,13 @@
 package ch.atos.tm.bluepoodle.repository;
 
+import static org.testng.AssertJUnit.assertEquals;
+
 import org.testng.Assert;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.testng.annotations.Test;
 
 import ch.atos.tm.bluepoodle.AbstractIntegrationTest;
@@ -13,7 +16,7 @@ import ch.atos.tm.bluepoodle.domain.QPublisher;
 
 import com.mysema.query.types.expr.BooleanExpression;
 
-
+@Transactional
 public class PublisherRepositoryIntegrationTest extends AbstractIntegrationTest {
 	
 	@Autowired
@@ -35,8 +38,8 @@ public class PublisherRepositoryIntegrationTest extends AbstractIntegrationTest 
 		publisher.setLastName("Delete");
 		publisher.setFirstName("Me");			
 		publisher = publisherRepository.save(publisher);
-		publisherRepository.delete(publisher.getPersonId());
-		Assert.assertNull(publisherRepository.findOne(publisher.getPersonId()));
+		publisherRepository.delete(publisher.getId());
+		Assert.assertNull(publisherRepository.findOne(publisher.getId()));
 	}
 	
 	@Test
@@ -80,5 +83,17 @@ public class PublisherRepositoryIntegrationTest extends AbstractIntegrationTest 
 		List<Publisher> publisher = (List<Publisher>) publishers;
 		Assert.assertEquals(1, publisher.size());
 		Assert.assertEquals(email, publisher.get(0).getEmail());
+	}
+	
+	@Test
+	public void updatePublisherByName() throws Exception {
+		String firstName = "publisher";
+		List<Publisher> result = publisherRepository.findByFirstName(firstName);
+		Publisher toUpdate = result.get(0);
+		String email = "newpublisher@atos.ch";
+		toUpdate.setEmail(email);
+		publisherRepository.save(toUpdate);
+		List<Publisher> updated = publisherRepository.findByFirstName(firstName);
+		assertEquals(email, updated.get(0).getEmail());
 	}
 }

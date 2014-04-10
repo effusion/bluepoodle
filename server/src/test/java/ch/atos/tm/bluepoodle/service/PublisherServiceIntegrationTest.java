@@ -1,11 +1,12 @@
 package ch.atos.tm.bluepoodle.service;
 
-import org.testng.Assert;
+
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNull;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import ch.atos.tm.bluepoodle.AbstractIntegrationTest;
@@ -31,36 +32,43 @@ public class PublisherServiceIntegrationTest extends AbstractIntegrationTest {
 	private EventRepository eventRepository;
 	private Publisher publisher;
 	
-	@BeforeClass
-	public void setUp(){
-		publisher = publisherRepository.findOne(2L);
-	}
-	
 	@Test
 	public void findAllEventsForOnePublisher(){
+		publisher = publisherRepository.findOne(2L);
 		List<Event> events = publisherService.findAllEvents(publisher);
-		Assert.assertEquals(2,events.size());
+		assertEquals(2,events.size());
 	}
 	
 	@Test
 	public void modifyEvent(){
+		publisher = publisherRepository.findOne(2L);
 		List<Event> events = publisherService.findAllEvents(publisher);
+		int oldEventSize = events.size();
 		Event event = events.get(0);
 		event.setLocation(locationRepository.findOne(4L));
-		publisherService.save(event);
+		publisherService.update(event);
+		events = publisherService.findAllEvents(publisher);
+		assertEquals(oldEventSize,events.size());
 	}
 	
 	@Test
 	public void findAllEventTypeForOnePublisher(){
+		publisher = publisherRepository.findOne(2L);
 		List<EventType> eventsTypes = publisherService.findAllEventTypes(publisher);
-		Assert.assertEquals(2,eventsTypes.size());
+		assertEquals(2,eventsTypes.size());
 	}
 	
 	@Test
 	public void deleteEvent(){
-		publisherService.deleteEvent(eventRepository.findOne(3L));
-		Assert.assertNull(eventRepository.findOne(3L));
+		publisherService.deleteEvent(eventRepository.findOne(3L), publisherRepository.findOne(2L));
+		assertNull(eventRepository.findOne(3L));
 	}
 	
-	
+	@Test
+	public void createEvent(){
+		Event event = new Event();
+		EventType eventType = eventTypeRepository.findOne(1L);
+		event.setEventType(eventType);
+		event.setName("JavaLand");
+	}
 }
