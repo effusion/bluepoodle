@@ -3,16 +3,12 @@ package ch.atos.tm.bluepoodle.domain;
 import java.util.Set;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Location {
-	@Id
-	@GeneratedValue
-	private Long locationId;
+public class Location extends BaseEntity{
+	private static final long serialVersionUID = -7146866392356971625L;
 	private String name;
 	private String description;
 
@@ -36,14 +32,6 @@ public class Location {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public Long getLocationId() {
-		return locationId;
-	}
-
-	public void setLocationId(Long locationId) {
-		this.locationId = locationId;
 	}
 
 	public Set<Event> getEvent() {

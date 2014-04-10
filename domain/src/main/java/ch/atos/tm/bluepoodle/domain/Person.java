@@ -1,15 +1,11 @@
 package ch.atos.tm.bluepoodle.domain;
 
 import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public abstract class Person {
-	@Id
-	@GeneratedValue
-	private Long personId;
+public abstract class Person extends BaseEntity{
+	private static final long serialVersionUID = 6018369963249231251L;
 	private String userName;
 	private String lastName;
 	private String firstName;
@@ -46,13 +42,5 @@ public abstract class Person {
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
-	}
-
-	public Long getPersonId() {
-		return personId;
-	}
-
-	public void setPersonId(Long personId) {
-		this.personId = personId;
 	}
 }

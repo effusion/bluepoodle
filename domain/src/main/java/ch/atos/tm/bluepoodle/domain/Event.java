@@ -1,21 +1,17 @@
 package ch.atos.tm.bluepoodle.domain;
 
-import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.Type;
+import org.joda.time.LocalDateTime;
 
 @Entity
-public class Event {
-	@Id
-	@GeneratedValue
-	private Long eventId;
+public class Event extends BaseEntity {
+	private static final long serialVersionUID = 4786942822061836258L;
 	@ManyToOne
 	private EventType eventType;
 	@ManyToOne
@@ -25,10 +21,10 @@ public class Event {
 	@OneToMany(mappedBy = "pk.event")
 	private Set<Subscription> subscriptions;
 	private String name;
-	@Type(type="date")
-	private Date startDate;
-	@Type(type="date")
-	private Date endDate;
+	@Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
+	private LocalDateTime startDate;
+	@Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
+	private LocalDateTime endDate;
 
 	public EventType getEventType() {
 		return eventType;
@@ -54,14 +50,6 @@ public class Event {
 		this.subscriptions = subscriptions;
 	}
 
-	public Long getEventId() {
-		return eventId;
-	}
-
-	public void setEventId(Long eventId) {
-		this.eventId = eventId;
-	}
-
 	public Location getLocation() {
 		return location;
 	}
@@ -78,19 +66,27 @@ public class Event {
 		this.name = name;
 	}
 	
-	public Date getStartDate() {
+	public void addSubscription(Subscription subscription){
+		subscriptions.add(subscription);
+	}
+	
+	public void removeSubscription(Subscription subscription){
+		subscriptions.remove(subscription);
+	}
+	public LocalDateTime getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(LocalDateTime startDate) {
 		this.startDate = startDate;
 	}
 
-	public Date getEndDate() {
+	public LocalDateTime getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(LocalDateTime endDate) {
 		this.endDate = endDate;
 	}
+
 }

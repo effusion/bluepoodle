@@ -10,6 +10,9 @@ public class Subscription {
 	private SubscriptionCompositePK pk;
 	private String comment;
 
+	public Subscription(){
+		pk = new SubscriptionCompositePK();
+	}
 	public String getComment() {
 		return comment;
 	}

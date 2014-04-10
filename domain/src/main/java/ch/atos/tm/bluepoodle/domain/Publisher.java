@@ -7,7 +7,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Publisher extends Person {
-
+	private static final long serialVersionUID = 2981198960907676793L;
 	@OneToMany(mappedBy = "publisher")
 	private Set<EventType> eventTypes;
 	@OneToMany(mappedBy = "publisher")

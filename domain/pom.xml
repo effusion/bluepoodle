@@ -1,14 +1,15 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
 	<parent>
 		<groupId>ch.atos.tm.bluepoodle</groupId>
 		<artifactId>bluepoodle-parent</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-  
+
 	<artifactId>bluepoodle-domain</artifactId>
-  
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.data</groupId>
@@ -32,6 +33,21 @@
 			<version>${querydsl.version}</version>
 			<scope>provided</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time-hibernate</artifactId>
+		</dependency>
+		
+		<dependency>
+    <groupId>org.jadira.usertype</groupId>
+    <artifactId>usertype.core</artifactId>
+    <version>3.1.0.GA</version>
+</dependency>
 
 		<dependency>
 			<groupId>com.mysema.querydsl</groupId>
@@ -61,62 +77,62 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<plugins>
 			<!-- querydsl -->
 			<plugin>
-		      <groupId>com.mysema.maven</groupId>
-		      <artifactId>apt-maven-plugin</artifactId>
-		      <executions>
-		        <execution>
-		          <goals>
-		            <goal>process</goal>
-		          </goals>
-		          <configuration>
-		            <outputDirectory>target/generated-sources/java</outputDirectory>
-		            <processor>com.mysema.query.apt.jpa.JPAAnnotationProcessor</processor>
-		          </configuration>
-		        </execution>
-		      </executions>
-		    </plugin>
+				<groupId>com.mysema.maven</groupId>
+				<artifactId>apt-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>process</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>target/generated-sources/java</outputDirectory>
+							<processor>com.mysema.query.apt.jpa.JPAAnnotationProcessor</processor>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
-			  <groupId>net.atos.de.juplo</groupId>
-			  <artifactId>hibernate4-maven-plugin</artifactId>
-			  <version>1.0.4.rc1</version>
-			  <executions>
-				<execution>
-					<id>hsqldb</id>
-				  <goals>
-					<goal>export</goal>
-				  </goals>
-				  <configuration>
-					<driverClassName>org.hsqldb.jdbcDriver</driverClassName>
-					<hibernateDialect>org.hibernate.dialect.HSQLDialect</hibernateDialect>
-					<url><![CDATA[jdbc:hsqldb:mem:bluepoodle;shutdown=true]]></url>
-					<username>sa</username>
-					<password></password>
-					<outputFile>${project.build.directory}/schema/schema-hsqldb.sql</outputFile>
-					<type>CREATE</type>
-				  </configuration>
-				</execution>
-				<execution>
-					<id>postgres</id>
-				  <goals>
-					<goal>export</goal>
-				  </goals>
-				  <configuration>
-					<driverClassName>org.postgresql.Driver</driverClassName>
-					<hibernateDialect>org.hibernate.dialect.PostgreSQL9Dialect</hibernateDialect>
-					<url><![CDATA[jdbc:postgresql://tm-database.ch902.my-it-solutions.net:5432/bluepoodledb]]></url>
-					<username>bluepoodle-user</username>
-					<password>poodle</password>
-					<outputFile>${project.build.directory}/schema/schema-postgres.sql</outputFile>
-					<type>CREATE</type>
-				  </configuration>
-				</execution>
-			  </executions>
-				<dependencies>	
+				<groupId>net.atos.de.juplo</groupId>
+				<artifactId>hibernate4-maven-plugin</artifactId>
+				<version>1.0.4.rc1</version>
+				<executions>
+					<execution>
+						<id>hsqldb</id>
+						<goals>
+							<goal>export</goal>
+						</goals>
+						<configuration>
+							<driverClassName>org.hsqldb.jdbcDriver</driverClassName>
+							<hibernateDialect>org.hibernate.dialect.HSQLDialect</hibernateDialect>
+							<url><![CDATA[jdbc:hsqldb:mem:bluepoodle;shutdown=true]]></url>
+							<username>sa</username>
+							<password></password>
+							<outputFile>${project.build.directory}/../src/test/resources/schema-hsqldb.sql</outputFile>
+							<type>CREATE</type>
+						</configuration>
+					</execution>
+					<execution>
+						<id>postgres</id>
+						<goals>
+							<goal>export</goal>
+						</goals>
+						<configuration>
+							<driverClassName>org.postgresql.Driver</driverClassName>
+							<hibernateDialect>org.hibernate.dialect.PostgreSQL9Dialect</hibernateDialect>
+							<url><![CDATA[jdbc:postgresql://tm-database.ch902.my-it-solutions.net:5432/bluepoodledb]]></url>
+							<username>bluepoodle-user</username>
+							<password>poodle</password>
+							<outputFile>${project.build.directory}/schema/schema-postgres.sql</outputFile>
+							<type>CREATE</type>
+						</configuration>
+					</execution>
+				</executions>
+				<dependencies>
 					<dependency>
 						<groupId>org.hsqldb</groupId>
 						<artifactId>hsqldb</artifactId>
@@ -127,8 +143,8 @@
 						<artifactId>postgresql</artifactId>
 						<version>9.2-1004-jdbc4</version>
 					</dependency>
-				</dependencies>	
-			</plugin>	
+				</dependencies>
+			</plugin>
 		</plugins>
 	</build>
 </project>

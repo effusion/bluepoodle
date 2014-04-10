@@ -3,7 +3,6 @@ package ch.atos.tm.bluepoodle.domain;
 import java.io.Serializable;
 
 import javax.persistence.Embeddable;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Embeddable
@@ -11,17 +10,19 @@ public class SubscriptionCompositePK implements Serializable {
 
 	private static final long serialVersionUID = 2946794011624729478L;
 
-	@ManyToOne()
-	@JoinColumn(name = "eventid")
+	@ManyToOne
 	private Event event;
 	@ManyToOne
-	@JoinColumn(name = "personid")
 	private Subscriber subscriber;
 
 	public SubscriptionCompositePK(Event event, Subscriber subscriber) {
 		super();
 		this.event = event;
 		this.subscriber = subscriber;
+	}
+
+	public SubscriptionCompositePK() {
+		super();
 	}
 
 	public Event getEvent() {
@@ -39,5 +40,4 @@ public class SubscriptionCompositePK implements Serializable {
 	public void setSubscriber(Subscriber subscriber) {
 		this.subscriber = subscriber;
 	}
-
 }

@@ -3,19 +3,16 @@ package ch.atos.tm.bluepoodle.domain;
 import java.util.Set;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class EventType {
-	@Id
-	@GeneratedValue
-	private Long eventTypeId;
+public class EventType extends BaseEntity{
+
+	private static final long serialVersionUID = -2302204843643822946L;
 	private String name;
 	private String description;
 	@ManyToOne
@@ -25,8 +22,8 @@ public class EventType {
 
 	@ManyToMany
 	@JoinTable(name = "eventtype_location_assoc", 
-		joinColumns = { @JoinColumn(name = "eventtypeid", nullable = false, updatable = false) },
-		inverseJoinColumns = { @JoinColumn(name = "locationid", nullable = false, updatable = false) })
+		joinColumns = { @JoinColumn(name = "eventtype_id", nullable = false, updatable = false) },
+		inverseJoinColumns = { @JoinColumn(name = "location_id", nullable = false, updatable = false) })
 	private Set<Location> location;
 
 	public Publisher getPublisher() {
@@ -59,14 +56,6 @@ public class EventType {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public Long getEventTypeId() {
-		return eventTypeId;
-	}
-
-	public void setEventTypeId(Long eventTypeId) {
-		this.eventTypeId = eventTypeId;
 	}
 
 	public Set<Location> getLocation() {
