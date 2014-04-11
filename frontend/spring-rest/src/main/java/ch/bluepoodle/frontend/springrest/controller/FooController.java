@@ -1,4 +1,4 @@
-package ch.atos.tm.bluepoodle.frontend.springrest.controller;
+package ch.bluepoodle.frontend.springrest.controller;
 
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 
@@ -6,7 +6,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
-import ch.atos.tm.bluepoodle.frontend.springrest.dummy.Foo;
+import ch.bluepoodle.frontend.springrest.dummy.Foo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;

@@ -98,7 +98,7 @@
   </logger>
 
   <!-- Log application messages -->
-   <logger name="ch.atos.tm.bluepoodle">
+   <logger name="ch.bluepoodle">
       <level value="debug"/>
   </logger>
  

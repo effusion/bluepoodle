@@ -1,4 +1,4 @@
-package ch.atos.tm.bluepoodle.frontend.springrest.security;
+package ch.bluepoodle.frontend.springrest.security;
 
 import java.io.IOException;
 

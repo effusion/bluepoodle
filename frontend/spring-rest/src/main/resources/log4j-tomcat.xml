@@ -103,7 +103,7 @@
   </logger>
   
   <!-- Log application messages -->
-   <logger name="ch.atos.tm.bluepoodles">
+   <logger name="ch.bluepoodles">
       <level value="debug"/>
   </logger>
 

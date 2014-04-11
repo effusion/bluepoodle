@@ -1,4 +1,4 @@
-package ch.atos.tm.bluepoodle.frontend.springrest.dummy;
+package ch.bluepoodle.frontend.springrest.dummy;
 
 import java.io.Serializable;
 

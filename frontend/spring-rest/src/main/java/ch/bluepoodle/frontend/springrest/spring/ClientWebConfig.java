@@ -1,4 +1,4 @@
-package ch.atos.tm.bluepoodle.frontend.springrest.spring;
+package ch.bluepoodle.frontend.springrest.spring;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
