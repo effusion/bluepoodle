@@ -12,13 +12,13 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd ">
 
 	<tx:annotation-driven />
-	<jpa:repositories base-package="ch.atos.tm.bluepoodle.repository" />
+	<jpa:repositories base-package="ch.bluepoodle.repository" />
 	
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
 	 
-	<context:component-scan base-package="ch.atos.tm.bluepoodle.service.impl" />
+	<context:component-scan base-package="ch.bluepoodle.service.impl" />
 	
 	<!--
 	<import resource="applicationContext-security.xml"/>
@@ -26,7 +26,7 @@
 
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="packagesToScan" value="ch.atos.tm.bluepoodle.domain" />
+		<property name="packagesToScan" value="ch.bluepoodle.domain" />
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 				<property name="database" value="POSTGRESQL" />

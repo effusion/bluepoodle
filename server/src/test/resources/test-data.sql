@@ -21,9 +21,9 @@ insert into eventtype_location_assoc (location_id, eventtype_id) values (1, 1)
 insert into eventtype_location_assoc (location_id, eventtype_id) values (3, 1)
 insert into eventtype_location_assoc (location_id, eventtype_id) values (2, 2)
 
-insert into event (id, version, name, eventtype_id, location_id, publisher_id) values (1, 0, 'JavaOne', 1, 1, 2)
-insert into event (id, version, name, eventtype_id, location_id, publisher_id) values (2, 0, 'W-JAX', 1, 3, 2)
-insert into event (id, version, name, eventtype_id, location_id, publisher_id) values (3, 0, 'Jazoon', 1, 5, 2)
+insert into event (id, version, name, eventtype_id, location_id, publisher_id, state) values (1, 0, 'JavaOne', 1, 1, 2, 'CONFIRMED')
+insert into event (id, version, name, eventtype_id, location_id, publisher_id, state) values (2, 0, 'W-JAX', 1, 3, 2, 'PLANNED')
+insert into event (id, version, name, eventtype_id, location_id, publisher_id, state) values (3, 0, 'Jazoon', 1, 5, 2, 'PLANNED')
 
 insert into subscription (subscriber_id, event_id, comment) values (1, 2, 'Some text.')
 insert into subscription (subscriber_id, event_id, comment) values (4, 1, 'Java Roxs.')

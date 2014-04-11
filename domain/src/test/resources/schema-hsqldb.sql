@@ -5,6 +5,7 @@
         endDate timestamp,
         name varchar(255),
         startDate timestamp,
+        state varchar(255),
         eventType_id bigint,
         location_id bigint,
         publisher_id bigint,
