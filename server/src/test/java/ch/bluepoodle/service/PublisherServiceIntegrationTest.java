@@ -3,21 +3,25 @@ package ch.bluepoodle.service;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNull;
+import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.assertFalse;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import ch.bluepoodle.AbstractIntegrationTest;
 import ch.bluepoodle.domain.Event;
 import ch.bluepoodle.domain.EventType;
 import ch.bluepoodle.domain.Publisher;
+import ch.bluepoodle.domain.Subscriber;
 import ch.bluepoodle.repository.EventRepository;
 import ch.bluepoodle.repository.EventTypeRepository;
 import ch.bluepoodle.repository.LocationRepository;
 import ch.bluepoodle.repository.PublisherRepository;
-import ch.bluepoodle.service.PublisherService;
+import ch.bluepoodle.repository.SubscriberRepository;
 
 public class PublisherServiceIntegrationTest extends AbstractIntegrationTest {
 	
@@ -31,18 +35,25 @@ public class PublisherServiceIntegrationTest extends AbstractIntegrationTest {
 	private LocationRepository locationRepository;
 	@Autowired
 	private EventRepository eventRepository;
+	@Autowired
+	private SubscriberRepository subscriberRepository;
 	private Publisher publisher;
+	
+	private static Long PUBLISHER_KUHTZ = 2L;
+	
+	@BeforeMethod
+	public void beforeMethod(){
+		publisher = publisherRepository.findOne(PUBLISHER_KUHTZ);
+	}
 	
 	@Test
 	public void findAllEventsForOnePublisher(){
-		publisher = publisherRepository.findOne(2L);
 		List<Event> events = publisherService.findAllEvents(publisher);
 		assertEquals(2,events.size());
 	}
 	
 	@Test
 	public void modifyEvent(){
-		publisher = publisherRepository.findOne(2L);
 		List<Event> events = publisherService.findAllEvents(publisher);
 		int oldEventSize = events.size();
 		Event event = events.get(0);
@@ -54,14 +65,13 @@ public class PublisherServiceIntegrationTest extends AbstractIntegrationTest {
 	
 	@Test
 	public void findAllEventTypeForOnePublisher(){
-		publisher = publisherRepository.findOne(2L);
 		List<EventType> eventsTypes = publisherService.findAllEventTypes(publisher);
 		assertEquals(2,eventsTypes.size());
 	}
 	
 	@Test
 	public void deleteEvent(){
-		publisherService.deleteEvent(eventRepository.findOne(3L), publisherRepository.findOne(2L));
+		publisherService.deleteEvent(eventRepository.findOne(3L), publisher);
 		assertNull(eventRepository.findOne(3L));
 	}
 	
@@ -70,6 +80,33 @@ public class PublisherServiceIntegrationTest extends AbstractIntegrationTest {
 		Event event = new Event();
 		EventType eventType = eventTypeRepository.findOne(1L);
 		event.setEventType(eventType);
-		event.setName("JavaLand");
+		event.setPublisher(publisher);
+		String name = "JavaLand";
+		event.setName(name);
+		event.setLocation(locationRepository.findOne(4L));
+		event = publisherService.createEvent(event);
+		assertEquals(event.getName(),name);
+		publisherService.deleteEvent(event, publisher);
+	}
+	
+	@Test
+	public void findAllSubscribersForEvent(){
+		List<Event> events = publisherService.findAllEvents(publisher);
+		Event event = events.get(0);
+		List<Subscriber> subscribers = publisherService.findAllSubscribers(event);
+		assertFalse(subscribers.isEmpty());
+		Subscriber excpectedSubscriber = subscriberRepository.findOne(4L);
+		assertTrue(subscribers.contains(excpectedSubscriber));
+	}
+	
+	@Test
+	public void addSubscriberToEvent(){
+		List<Event> events = publisherService.findAllEvents(publisher);
+		Event event = events.get(0);
+		Subscriber subscriber = subscriberRepository.findOne(3L);
+		List<Subscriber> subscribers = publisherService.findAllSubscribers(event);
+		int subscriberCount = subscribers.size();
+		publisherService.addSubscriberToEvent(event,subscriber, "Geh mal hin und lern was!");
+		assertEquals(publisherService.findAllSubscribers(event).size(),subscriberCount+1);
 	}
 }

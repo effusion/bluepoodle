@@ -50,8 +50,6 @@ public class SubscriberServiceImpl implements SubscriberService {
 
 	@Override
 	public void subscribe(Event event, Subscriber subscriber, String comment) {
-		event = eventRepository.findOne(event.getId());
-		subscriber = subscriberRepository.findOne(subscriber.getId());
 		Subscription subscription = new Subscription();
 		subscription.setEvent(event);
 		subscription.setSubscriber(subscriber);

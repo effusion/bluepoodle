@@ -5,6 +5,7 @@ import java.util.List;
 import ch.bluepoodle.domain.Event;
 import ch.bluepoodle.domain.EventType;
 import ch.bluepoodle.domain.Publisher;
+import ch.bluepoodle.domain.Subscriber;
 
 
 public interface PublisherService {
@@ -13,4 +14,6 @@ public interface PublisherService {
 	List<EventType> findAllEventTypes(Publisher publisher);
 	void deleteEvent(Event event, Publisher publisher);
 	Event createEvent(Event event);
+	List<Subscriber> findAllSubscribers(Event event);
+	void addSubscriberToEvent(Event event, Subscriber subscriber, String comment);
 }

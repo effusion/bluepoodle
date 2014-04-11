@@ -16,8 +16,13 @@ import ch.bluepoodle.domain.QEvent;
 import ch.bluepoodle.domain.QEventType;
 
 
+import ch.bluepoodle.domain.QSubscriber;
+import ch.bluepoodle.domain.QSubscription;
+import ch.bluepoodle.domain.Subscriber;
+import ch.bluepoodle.domain.Subscription;
 import ch.bluepoodle.repository.EventRepository;
 import ch.bluepoodle.repository.EventTypeRepository;
+import ch.bluepoodle.repository.SubscriptionRepository;
 import ch.bluepoodle.service.PublisherService;
 
 import com.mysema.query.jpa.impl.JPAQuery;
@@ -31,6 +36,8 @@ public class PublisherServiceImpl implements PublisherService {
 	private EventRepository eventRepository;
 	@Autowired
 	private EventTypeRepository eventTypeRepository;
+	@Autowired
+	private SubscriptionRepository subscriptionRepository;
 	
 	@Override
 	public List<Event> findAllEvents(Publisher publisher) {
@@ -60,7 +67,27 @@ public class PublisherServiceImpl implements PublisherService {
 
 	@Override
 	public Event createEvent(Event event) {
-		// TODO Auto-generated method stub
-		return null;
+		return eventRepository.save(event);
+	}
+
+	@Override
+	public List<Subscriber> findAllSubscribers(Event event) {
+		QSubscriber subscriber = QSubscriber.subscriber;
+		QSubscription subscription = QSubscription.subscription;
+		QEvent event1 = QEvent.event;
+		JPAQuery query = new JPAQuery(em);
+		return query.distinct().from(subscriber)
+				.join(subscriber.subscriptions,subscription)
+				.leftJoin(subscription.pk.event,event1)
+				.where(event1.eq(event)).list(subscriber);
+	}
+
+	@Override
+	public void addSubscriberToEvent(Event event, Subscriber subscriber, String comment) {
+		Subscription subscription = new Subscription();
+		subscription.setEvent(event);
+		subscription.setSubscriber(subscriber);
+		subscription.setComment(comment);
+		subscriptionRepository.save(subscription);
 	}
 }
