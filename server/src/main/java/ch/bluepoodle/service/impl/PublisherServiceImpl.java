@@ -14,14 +14,11 @@ import ch.bluepoodle.domain.EventType;
 import ch.bluepoodle.domain.Publisher;
 import ch.bluepoodle.domain.QEvent;
 import ch.bluepoodle.domain.QEventType;
-
-
 import ch.bluepoodle.domain.QSubscriber;
 import ch.bluepoodle.domain.QSubscription;
 import ch.bluepoodle.domain.Subscriber;
 import ch.bluepoodle.domain.Subscription;
 import ch.bluepoodle.repository.EventRepository;
-import ch.bluepoodle.repository.EventTypeRepository;
 import ch.bluepoodle.repository.SubscriptionRepository;
 import ch.bluepoodle.service.PublisherService;
 
@@ -34,8 +31,6 @@ public class PublisherServiceImpl implements PublisherService {
 	private EntityManager em;	
 	@Autowired
 	private EventRepository eventRepository;
-	@Autowired
-	private EventTypeRepository eventTypeRepository;
 	@Autowired
 	private SubscriptionRepository subscriptionRepository;
 	

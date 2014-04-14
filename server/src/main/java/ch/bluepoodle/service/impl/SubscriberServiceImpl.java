@@ -10,14 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import ch.bluepoodle.domain.QEvent;
-import ch.bluepoodle.domain.QSubscription;
 import ch.bluepoodle.domain.Event;
 import ch.bluepoodle.domain.EventState;
+import ch.bluepoodle.domain.QEvent;
+import ch.bluepoodle.domain.QSubscription;
 import ch.bluepoodle.domain.Subscriber;
 import ch.bluepoodle.domain.Subscription;
-import ch.bluepoodle.repository.EventRepository;
-import ch.bluepoodle.repository.SubscriberRepository;
 import ch.bluepoodle.repository.SubscriptionRepository;
 import ch.bluepoodle.service.SubscriberService;
 
@@ -30,13 +28,8 @@ public class SubscriberServiceImpl implements SubscriberService {
 	
 	@PersistenceContext
 	private EntityManager em;
-	
-	@Autowired
-	private EventRepository eventRepository;
 	@Autowired
 	private SubscriptionRepository subscriptionRepository;
-	@Autowired
-	private SubscriberRepository subscriberRepository;
 	
 	@Override
 	public List<Event> findAllSubscribedEvents(Subscriber subscriber) {
