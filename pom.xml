@@ -822,22 +822,7 @@
 		<module>frontend</module>
 	</modules>
 
-	<pluginRepositories>
-		<pluginRepository>
-			<id>central-plugins</id>
-			<url>http://${proxy.repo}/nexus/content/groups/fislw-all-repositories</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-		<pluginRepository>
-			<id>central-plugins-snapshots</id>
-			<url>http://${proxy.repo}/nexus/content/groups/fislw-all-snapshots</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
+	
 
 	<properties>
 		<proxy.repo>tm-nexus.ch902.my-it-solutions.net:28082</proxy.repo>

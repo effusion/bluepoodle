@@ -18,7 +18,7 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan({"ch.bluepoodle.service.impl"})
+@ComponentScan({"ch.bluepoodle.service"})
 @EnableJpaRepositories(basePackages={"ch.bluepoodle.repository"})
 public class TestApplicationConfig {
 
