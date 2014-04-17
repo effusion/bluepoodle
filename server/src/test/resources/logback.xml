@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+<!--
+*************************************************************************
+	DEFAULT Logging Configuration (Packaged in RPM)
+	
+	The default logging directory is /var/log/polyalert which can be 
+	overriden by setting the system property polyalert.cc.log.dir.
+*************************************************************************
+-->
+	<!-- Enable configuration via JMX, see: http://logback.qos.ch/manual/jmxConfig.html -->
+<!-- 	<jmxConfigurator /> -->
+
+	<!-- ******************************************
+		 APPENDERS
+		 ****************************************** -->
+
+	<appender name="LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>logfile.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>logfile_%i.log</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>6</MaxIndex>
+		</rollingPolicy>
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>40MB</MaxFileSize>
+		</triggeringPolicy>
+		<encoder>
+			<Pattern>[%d{dd.MM.yyyy HH:mm:ss.SSS}] %-5level %-28.28thread %-64.64logger{64} %msg %ex%n</Pattern>
+		</encoder>
+	</appender>
+	
+	<!-- ******************************************
+		 LOGGERS
+		 ****************************************** -->
+		 
+	<logger name="ch.bluepoodle" level="INFO" />
+	<logger name="org.springframework" level="INFO" />
+	<logger name="org.hibernate" level="WARN" />
+
+	<root level="DEBUG">
+		<appender-ref ref="LOG_FILE"/>
+	</root>
+
+</configuration>
