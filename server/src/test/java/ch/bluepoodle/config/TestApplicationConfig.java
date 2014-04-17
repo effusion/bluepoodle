@@ -2,9 +2,11 @@ package ch.bluepoodle.config;
 
 import javax.sql.DataSource;
 
+import org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
@@ -18,8 +20,9 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan({"ch.bluepoodle.service"})
-@EnableJpaRepositories(basePackages={"ch.bluepoodle.repository"})
+@ComponentScan({ "ch.bluepoodle" })
+@EnableJpaRepositories(basePackages = { "ch.bluepoodle.repository" })
+@EnableAspectJAutoProxy
 public class TestApplicationConfig {
 
 	@Bean
@@ -27,8 +30,7 @@ public class TestApplicationConfig {
 		EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
 		return builder.setType(EmbeddedDatabaseType.HSQL)
 				.addScript("classpath:schema-hsqldb.sql")
-				.addScript("classpath:test-data.sql")
-				.build();
+				.addScript("classpath:test-data.sql").build();
 	}
 
 	@Bean
@@ -49,10 +51,16 @@ public class TestApplicationConfig {
 		txManager.setEntityManagerFactory(entityManagerFactory().getObject());
 		return txManager;
 	}
-	
+
 	@Bean
-    public LocalValidatorFactoryBean getValidator() {
+	public LocalValidatorFactoryBean getValidator() {
 		LocalValidatorFactoryBean lvfb = new LocalValidatorFactoryBean();
-        return lvfb;
-    }
+		return lvfb;
+	}
+
+	@Bean
+	public AnnotationAwareAspectJAutoProxyCreator annotationAwareAspectJAutoProxyCreator() {
+		AnnotationAwareAspectJAutoProxyCreator aop = new AnnotationAwareAspectJAutoProxyCreator();
+		return aop;
+	}
 }

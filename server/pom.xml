@@ -1,5 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
 		<groupId>ch.bluepoodle</groupId>
@@ -20,22 +21,22 @@
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
@@ -44,17 +45,17 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
@@ -63,8 +64,31 @@
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time-hibernate</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjtools</artifactId>
+		</dependency>
 		
-		
+		<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+		</dependency>
 		<!-- Hibernate -->
 		<dependency>
 			<groupId>javax</groupId>
@@ -72,13 +96,9 @@
 			<version>7.0</version>
 			<scope>provided</scope>
 		</dependency>
-		
-		<!--
-		<dependency>
-			<groupId>org.hibernate.javax.persistence</groupId>
-			<artifactId>hibernate-jpa-2.1-api</artifactId>
-		</dependency>
-		-->
+
+		<!-- <dependency> <groupId>org.hibernate.javax.persistence</groupId> <artifactId>hibernate-jpa-2.1-api</artifactId> 
+			</dependency> -->
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -98,10 +118,10 @@
 			<groupId>org.hamcrest</groupId>
 			<artifactId>hamcrest-all</artifactId>
 		</dependency>
-		
-		
+
+
 		<!-- Querydsl -->
-		
+
 
 		<dependency>
 			<groupId>commons-validator</groupId>
@@ -117,60 +137,60 @@
 			<artifactId>spring-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 		</dependency>
-		
+
 		<!-- testing -->
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
-	</dependencies>	
-	
+
+	</dependencies>
+
 	<build>
 		<plugins>
 			<plugin>
-			  <groupId>net.atos.de.juplo</groupId>
-			  <artifactId>hibernate4-maven-plugin</artifactId>
-			  <version>1.0.4.rc1</version>
-			  <executions>
-				<execution>
-					<id>hsqldb</id>
-				  <goals>
-					<goal>export</goal>
-				  </goals>
-				  <configuration>
-					<driverClassName>org.hsqldb.jdbcDriver</driverClassName>
-					<hibernateDialect>org.hibernate.dialect.HSQLDialect</hibernateDialect>
-					<url><![CDATA[jdbc:hsqldb:mem:bluepoodle;shutdown=true]]></url>
-					<username>sa</username>
-					<password></password>
-					<outputFile>${project.build.directory}/test-classes/schema-hsqldb.sql</outputFile>
-					<type>CREATE</type>
-				  </configuration>
-				</execution>
-				<execution>
-					<id>postgres</id>
-				  <goals>
-					<goal>export</goal>
-				  </goals>
-				  <configuration>
-					<driverClassName>org.postgresql.Driver</driverClassName>
-					<hibernateDialect>org.hibernate.dialect.PostgreSQL9Dialect</hibernateDialect>
-					<url><![CDATA[jdbc:postgresql://tm-database.ch902.my-it-solutions.net:5432/bluepoodledb]]></url>
-					<username>bluepoodle-user</username>
-					<password>poodle</password>
-					<outputFile>${project.build.directory}/sql-schemas/schema-postgres.sql</outputFile>
-					<type>CREATE</type>
-				  </configuration>
-				</execution>
-			  </executions>
-				<dependencies>	
+				<groupId>net.atos.de.juplo</groupId>
+				<artifactId>hibernate4-maven-plugin</artifactId>
+				<version>1.0.4.rc1</version>
+				<executions>
+					<execution>
+						<id>hsqldb</id>
+						<goals>
+							<goal>export</goal>
+						</goals>
+						<configuration>
+							<driverClassName>org.hsqldb.jdbcDriver</driverClassName>
+							<hibernateDialect>org.hibernate.dialect.HSQLDialect</hibernateDialect>
+							<url><![CDATA[jdbc:hsqldb:mem:bluepoodle;shutdown=true]]></url>
+							<username>sa</username>
+							<password></password>
+							<outputFile>${project.build.directory}/test-classes/schema-hsqldb.sql</outputFile>
+							<type>CREATE</type>
+						</configuration>
+					</execution>
+					<execution>
+						<id>postgres</id>
+						<goals>
+							<goal>export</goal>
+						</goals>
+						<configuration>
+							<driverClassName>org.postgresql.Driver</driverClassName>
+							<hibernateDialect>org.hibernate.dialect.PostgreSQL9Dialect</hibernateDialect>
+							<url><![CDATA[jdbc:postgresql://tm-database.ch902.my-it-solutions.net:5432/bluepoodledb]]></url>
+							<username>bluepoodle-user</username>
+							<password>poodle</password>
+							<outputFile>${project.build.directory}/sql-schemas/schema-postgres.sql</outputFile>
+							<type>CREATE</type>
+						</configuration>
+					</execution>
+				</executions>
+				<dependencies>
 					<dependency>
 						<groupId>org.hsqldb</groupId>
 						<artifactId>hsqldb</artifactId>
@@ -181,9 +201,9 @@
 						<artifactId>postgresql</artifactId>
 						<version>9.2-1004-jdbc4</version>
 					</dependency>
-				</dependencies>	
-			</plugin>	
+				</dependencies>
+			</plugin>
 		</plugins>
 	</build>
-	
+
 </project>

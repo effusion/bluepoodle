@@ -702,6 +702,36 @@
 			</dependency>
 
 			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aspects</artifactId>
+				<version>4.0.3.RELEASE</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aop</artifactId>
+				<version>4.0.3.RELEASE</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjweaver</artifactId>
+				<version>${aspectj.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjrt</artifactId>
+				<version>${aspectj.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjtools</artifactId>
+				<version>${aspectj.version}</version>
+			</dependency>
+
+			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-entitymanager</artifactId>
 				<version>${hibernate.version}</version>
@@ -770,6 +800,14 @@
 				<artifactId>log4j</artifactId>
 				<version>${log4j.version}</version>
 			</dependency>
+
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<scope>runtime</scope>
+				<version>${logback.version}</version>
+			</dependency>
+
 			<dependency>
 				<groupId>joda-time</groupId>
 				<artifactId>joda-time</artifactId>
@@ -822,7 +860,7 @@
 		<module>frontend</module>
 	</modules>
 
-	
+
 
 	<properties>
 		<proxy.repo>tm-nexus.ch902.my-it-solutions.net:28082</proxy.repo>
@@ -846,10 +884,12 @@
 		<properties-maven-plugin.version>1.0-alpha-2</properties-maven-plugin.version>
 
 		<aspectj.version>1.7.2</aspectj.version>
+		<logback.version>1.1.2</logback.version>
 		<testng.version>6.8.7</testng.version>
 		<junit.version>4.11</junit.version>
 
 		<xbean-spring-version>3.11</xbean-spring-version>
+		<aspectj.version>1.7.4</aspectj.version>
 
 		<camel-version>2.11.0</camel-version>
 		<cxf-version>2.7.5</cxf-version>
