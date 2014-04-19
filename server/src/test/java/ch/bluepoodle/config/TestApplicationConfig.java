@@ -17,6 +17,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 
 @Configuration
 @EnableTransactionManagement
@@ -62,5 +63,9 @@ public class TestApplicationConfig {
 	public AnnotationAwareAspectJAutoProxyCreator annotationAwareAspectJAutoProxyCreator() {
 		AnnotationAwareAspectJAutoProxyCreator aop = new AnnotationAwareAspectJAutoProxyCreator();
 		return aop;
+	}
+	@Bean
+	public MethodValidationPostProcessor methodValidationPostProcessor(){
+		return new MethodValidationPostProcessor();
 	}
 }

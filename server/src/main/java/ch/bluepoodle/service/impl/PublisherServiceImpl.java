@@ -42,7 +42,7 @@ public class PublisherServiceImpl implements PublisherService {
 	}
 
 	@Override
-	public Event update(Event event) {
+	public Event updateEvent(Event event) {
 		return eventRepository.save(event);
 	}
 

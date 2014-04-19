@@ -3,8 +3,11 @@ package ch.bluepoodle.service;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
 
 import java.util.List;
+
+import javax.validation.ConstraintViolationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.BeforeMethod;
@@ -59,7 +62,36 @@ public class SubscriberServiceIntegrationTest extends AbstractIntegrationTest {
 	@Test
 	public void findAllConfirmedEvents(){
 		List<Event> events = subscriberService.findAllConfirmedEvents();
-		assertEquals(events.size(), 1);
+		assertEquals(events.size(), 1);	
+	}
+	@Test(expectedExceptions=ConstraintViolationException.class)
+	public void checkNullConstraintFindAllSubscribedEvents(){
+		subscriberService.findAllSubscribedEvents(null);
+	}
+	
+	@Test
+	public void checkNullConstraintsSubscribe(){
+		try{
+			subscriberService.subscribe(new Event(), null, "");
+			fail();
+		}catch(ConstraintViolationException e1){/*OK*/}
 		
+		try{
+			subscriberService.subscribe(null, new Subscriber(), "");
+			fail();
+		}catch(ConstraintViolationException e2){/*OK*/}
+	}
+	
+	@Test
+	public void checkNullConstraintsUnsubscribe(){
+		try{
+			subscriberService.unsubscribe(new Event(), null);
+			fail();
+		}catch(ConstraintViolationException e1){/*OK*/}
+		
+		try{
+			subscriberService.unsubscribe(null, null);
+			fail();
+		}catch(ConstraintViolationException e2){/*OK*/}
 	}
 }

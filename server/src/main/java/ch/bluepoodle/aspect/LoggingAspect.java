@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class LoggingAspect {
 	private static Logger LOGGER = LoggerFactory.getLogger("ServiceLogger");
 	
-	@Before("execution(public * ch.bluepoodle.service.*.*(..))")
+	@Before("execution(public * ch.bluepoodle.service.impl.*.*(..))")
     public void profile(JoinPoint joinPoint){
         LOGGER.info(joinPoint.getSignature().getName());
     }

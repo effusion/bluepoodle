@@ -5,8 +5,11 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.fail;
 
 import java.util.List;
+
+import javax.validation.ConstraintViolationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.BeforeMethod;
@@ -58,7 +61,7 @@ public class PublisherServiceIntegrationTest extends AbstractIntegrationTest {
 		int oldEventSize = events.size();
 		Event event = events.get(0);
 		event.setLocation(locationRepository.findOne(4L));
-		publisherService.update(event);
+		publisherService.updateEvent(event);
 		events = publisherService.findAllEvents(publisher);
 		assertEquals(oldEventSize,events.size());
 	}
@@ -108,5 +111,55 @@ public class PublisherServiceIntegrationTest extends AbstractIntegrationTest {
 		int subscriberCount = subscribers.size();
 		publisherService.addSubscriberToEvent(event,subscriber, "Geh mal hin und lern was!");
 		assertEquals(publisherService.findAllSubscribers(event).size(),subscriberCount+1);
+	}
+	@Test(expectedExceptions=ConstraintViolationException.class)
+	public void checkNullConstraintFindAllEvents(){
+		publisherService.findAllEvents(null);
+	}
+	
+	@Test(expectedExceptions=ConstraintViolationException.class)
+	public void checkNullConstraintCreateEvent(){
+		publisherService.createEvent(null);
+	}
+	
+	@Test(expectedExceptions=ConstraintViolationException.class)
+	public void checkNullConstraintUpdateEvent(){
+		publisherService.updateEvent(null);
+	}
+	
+	@Test(expectedExceptions=ConstraintViolationException.class)
+	public void checkNullConstraintFindAllEventTyps(){
+		publisherService.findAllEventTypes(null);
+	}
+	
+	@Test(expectedExceptions=ConstraintViolationException.class)
+	public void checkNullConstraintFindAllSubscribers(){
+		publisherService.findAllSubscribers(null);
+	}
+	
+	@Test
+	public void checkNullConstraintsDeleteEvent(){
+		try{
+			publisherService.deleteEvent(null, publisher);
+			fail();
+		}catch(ConstraintViolationException e1){/*OK*/}
+		
+		try{
+			publisherService.deleteEvent(new Event(), null);
+			fail();
+		}catch(ConstraintViolationException e2){/*OK*/}
+	}
+	
+	@Test
+	public void checkNullConstraintsAddSubscriberToEvent(){
+		try{
+			publisherService.addSubscriberToEvent(null, new Subscriber(), "");
+			fail();
+		}catch(ConstraintViolationException e1){/*OK*/}
+		
+		try{
+			publisherService.addSubscriberToEvent(new Event(), null, "");
+			fail();
+		}catch(ConstraintViolationException e2){/*OK*/}
 	}
 }
