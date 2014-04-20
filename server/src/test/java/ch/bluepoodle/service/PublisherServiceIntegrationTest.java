@@ -51,30 +51,30 @@ public class PublisherServiceIntegrationTest extends AbstractIntegrationTest {
 	
 	@Test
 	public void findAllEventsForOnePublisher(){
-		List<Event> events = publisherService.findAllEvents(publisher);
+		List<Event> events = publisherService.findAllEvents(publisher.getId());
 		assertEquals(2,events.size());
 	}
 	
 	@Test
 	public void modifyEvent(){
-		List<Event> events = publisherService.findAllEvents(publisher);
+		List<Event> events = publisherService.findAllEvents(publisher.getId());
 		int oldEventSize = events.size();
 		Event event = events.get(0);
 		event.setLocation(locationRepository.findOne(4L));
 		publisherService.updateEvent(event);
-		events = publisherService.findAllEvents(publisher);
+		events = publisherService.findAllEvents(publisher.getId());
 		assertEquals(oldEventSize,events.size());
 	}
 	
 	@Test
 	public void findAllEventTypeForOnePublisher(){
-		List<EventType> eventsTypes = publisherService.findAllEventTypes(publisher);
+		List<EventType> eventsTypes = publisherService.findAllEventTypes(publisher.getId());
 		assertEquals(2,eventsTypes.size());
 	}
 	
 	@Test
 	public void deleteEvent(){
-		publisherService.deleteEvent(eventRepository.findOne(3L), publisher);
+		publisherService.deleteEvent(eventRepository.findOne(3L).getId(), publisher.getId());
 		assertNull(eventRepository.findOne(3L));
 	}
 	
@@ -89,14 +89,14 @@ public class PublisherServiceIntegrationTest extends AbstractIntegrationTest {
 		event.setLocation(locationRepository.findOne(4L));
 		event = publisherService.createEvent(event);
 		assertEquals(event.getName(),name);
-		publisherService.deleteEvent(event, publisher);
+		publisherService.deleteEvent(event.getId(), publisher.getId());
 	}
 	
 	@Test
 	public void findAllSubscribersForEvent(){
-		List<Event> events = publisherService.findAllEvents(publisher);
+		List<Event> events = publisherService.findAllEvents(publisher.getId());
 		Event event = events.get(0);
-		List<Subscriber> subscribers = publisherService.findAllSubscribers(event);
+		List<Subscriber> subscribers = publisherService.findAllSubscribers(event.getId());
 		assertFalse(subscribers.isEmpty());
 		Subscriber excpectedSubscriber = subscriberRepository.findOne(4L);
 		assertTrue(subscribers.contains(excpectedSubscriber));
@@ -104,13 +104,13 @@ public class PublisherServiceIntegrationTest extends AbstractIntegrationTest {
 	
 	@Test
 	public void addSubscriberToEvent(){
-		List<Event> events = publisherService.findAllEvents(publisher);
+		List<Event> events = publisherService.findAllEvents(publisher.getId());
 		Event event = events.get(0);
 		Subscriber subscriber = subscriberRepository.findOne(3L);
-		List<Subscriber> subscribers = publisherService.findAllSubscribers(event);
+		List<Subscriber> subscribers = publisherService.findAllSubscribers(event.getId());
 		int subscriberCount = subscribers.size();
-		publisherService.addSubscriberToEvent(event,subscriber, "Geh mal hin und lern was!");
-		assertEquals(publisherService.findAllSubscribers(event).size(),subscriberCount+1);
+		publisherService.addSubscriberToEvent(event.getId(),subscriber.getId(), "Geh mal hin und lern was!");
+		assertEquals(publisherService.findAllSubscribers(event.getId()).size(),subscriberCount+1);
 	}
 	@Test(expectedExceptions=ConstraintViolationException.class)
 	public void checkNullConstraintFindAllEvents(){
@@ -140,12 +140,12 @@ public class PublisherServiceIntegrationTest extends AbstractIntegrationTest {
 	@Test
 	public void checkNullConstraintsDeleteEvent(){
 		try{
-			publisherService.deleteEvent(null, publisher);
+			publisherService.deleteEvent(null, 0L);
 			fail();
 		}catch(ConstraintViolationException e1){/*OK*/}
 		
 		try{
-			publisherService.deleteEvent(new Event(), null);
+			publisherService.deleteEvent(0L, null);
 			fail();
 		}catch(ConstraintViolationException e2){/*OK*/}
 	}
@@ -153,12 +153,12 @@ public class PublisherServiceIntegrationTest extends AbstractIntegrationTest {
 	@Test
 	public void checkNullConstraintsAddSubscriberToEvent(){
 		try{
-			publisherService.addSubscriberToEvent(null, new Subscriber(), "");
+			publisherService.addSubscriberToEvent(null, 0L, "");
 			fail();
 		}catch(ConstraintViolationException e1){/*OK*/}
 		
 		try{
-			publisherService.addSubscriberToEvent(new Event(), null, "");
+			publisherService.addSubscriberToEvent(0L, null, "");
 			fail();
 		}catch(ConstraintViolationException e2){/*OK*/}
 	}

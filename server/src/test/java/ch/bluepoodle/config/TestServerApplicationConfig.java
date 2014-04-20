@@ -24,7 +24,7 @@ import org.springframework.validation.beanvalidation.MethodValidationPostProcess
 @ComponentScan({ "ch.bluepoodle" })
 @EnableJpaRepositories(basePackages = { "ch.bluepoodle.repository" })
 @EnableAspectJAutoProxy
-public class TestApplicationConfig {
+public class TestServerApplicationConfig {
 
 	@Bean
 	public DataSource dataSource() {

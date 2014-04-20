@@ -7,13 +7,12 @@ import javax.validation.constraints.NotNull;
 import org.springframework.validation.annotation.Validated;
 
 import ch.bluepoodle.domain.Event;
-import ch.bluepoodle.domain.Subscriber;
 
 @Validated
 public interface SubscriberService {
-	List<Event> findAllSubscribedEvents(@NotNull Subscriber subscriber);
-	void subscribe(@NotNull Event event, @NotNull Subscriber subscriber, String comment);
-	void unsubscribe(@NotNull Event event, @NotNull Subscriber subscriber);
+	List<Event> findAllSubscribedEvents(@NotNull Long subscriberId);
+	void subscribe(@NotNull Long eventId, @NotNull Long subscriberId, String comment);
+	void unsubscribe(@NotNull Long eventId, @NotNull Long subscriberId);
 	List<Event> findAllConfirmedEvents();
 
 }

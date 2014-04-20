@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import ch.bluepoodle.domain.Event;
 import ch.bluepoodle.domain.EventType;
-import ch.bluepoodle.domain.Publisher;
 import ch.bluepoodle.domain.QEvent;
 import ch.bluepoodle.domain.QEventType;
 import ch.bluepoodle.domain.QSubscriber;
@@ -19,6 +18,7 @@ import ch.bluepoodle.domain.QSubscription;
 import ch.bluepoodle.domain.Subscriber;
 import ch.bluepoodle.domain.Subscription;
 import ch.bluepoodle.repository.EventRepository;
+import ch.bluepoodle.repository.SubscriberRepository;
 import ch.bluepoodle.repository.SubscriptionRepository;
 import ch.bluepoodle.service.PublisherService;
 
@@ -33,12 +33,16 @@ public class PublisherServiceImpl implements PublisherService {
 	private EventRepository eventRepository;
 	@Autowired
 	private SubscriptionRepository subscriptionRepository;
+	@Autowired
+	private SubscriberRepository subscriberRepository;
 	
 	@Override
-	public List<Event> findAllEvents(Publisher publisher) {
+	public List<Event> findAllEvents(Long publisherId) {
 		QEvent event = QEvent.event;
 		JPAQuery query = new JPAQuery(em);
-		return query.distinct().from(event).where(event.publisher.eq(publisher)).list(event);
+		return query.distinct().from(event).
+				where(event.publisher.id.eq(publisherId)).
+				list(event);
 	}
 
 	@Override
@@ -47,16 +51,19 @@ public class PublisherServiceImpl implements PublisherService {
 	}
 
 	@Override
-	public List<EventType> findAllEventTypes(Publisher publisher) {
+	public List<EventType> findAllEventTypes(Long publisherId) {
 		QEventType eventType = QEventType.eventType;
 		JPAQuery query = new JPAQuery(em);
-		return query.distinct().from(eventType).where(eventType.publisher.eq(publisher)).list(eventType);
+		return query.distinct().from(eventType).
+				where(eventType.publisher.id.eq(publisherId)).
+				list(eventType);
 	}
 
 	@Override
-	public void deleteEvent(Event event, Publisher publisher) {
-		if(event.getPublisher().equals(publisher)){
-			eventRepository.delete(event.getId());
+	public void deleteEvent(Long eventId, Long publisherId) {
+		Event event = eventRepository.findOne(eventId);
+		if(event.getPublisher().getId().equals(publisherId)){
+			eventRepository.delete(eventId);
 		}
 	}
 
@@ -66,7 +73,7 @@ public class PublisherServiceImpl implements PublisherService {
 	}
 
 	@Override
-	public List<Subscriber> findAllSubscribers(Event event) {
+	public List<Subscriber> findAllSubscribers(Long eventId) {
 		QSubscriber subscriber = QSubscriber.subscriber;
 		QSubscription subscription = QSubscription.subscription;
 		QEvent event1 = QEvent.event;
@@ -74,14 +81,14 @@ public class PublisherServiceImpl implements PublisherService {
 		return query.distinct().from(subscriber)
 				.join(subscriber.subscriptions,subscription)
 				.leftJoin(subscription.pk.event,event1)
-				.where(event1.eq(event)).list(subscriber);
+				.where(event1.id.eq(eventId)).list(subscriber);
 	}
 
 	@Override
-	public void addSubscriberToEvent(Event event, Subscriber subscriber, String comment) {
+	public void addSubscriberToEvent(Long eventId, Long subscriberId, String comment) {
 		Subscription subscription = new Subscription();
-		subscription.setEvent(event);
-		subscription.setSubscriber(subscriber);
+		subscription.setEvent(eventRepository.findOne(eventId));
+		subscription.setSubscriber(subscriberRepository.findOne(subscriberId));
 		subscription.setComment(comment);
 		subscriptionRepository.save(subscription);
 	}

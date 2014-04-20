@@ -38,24 +38,24 @@ public class SubscriberServiceIntegrationTest extends AbstractIntegrationTest {
 	
 	@Test
 	public void findAllEventsForOneSubscriber(){
-		List<Event> events = subscriberService.findAllSubscribedEvents(subscriber);
+		List<Event> events = subscriberService.findAllSubscribedEvents(subscriber.getId());
 		assertEquals(1,events.size());
 	}
 	
 	@Test
 	public void subscribeForEvent(){
-		subscriberService.subscribe(event, subscriber, "freu!");
-		List<Event> events = subscriberService.findAllSubscribedEvents(subscriber);
+		subscriberService.subscribe(event.getId(), subscriber.getId(), "freu!");
+		List<Event> events = subscriberService.findAllSubscribedEvents(subscriber.getId());
 		assertTrue(events.contains(event));
 	}
 	
 	@Test
 	public void unsubscribeFromEvent(){
 		subscriber = subscriberRepository.findOne(4L);
-		List<Event> events = subscriberService.findAllSubscribedEvents(subscriber);
+		List<Event> events = subscriberService.findAllSubscribedEvents(subscriber.getId());
 		Event eventToUnsubscribe = events.get(0);
-		subscriberService.unsubscribe(eventToUnsubscribe, subscriber);
-		events = subscriberService.findAllSubscribedEvents(subscriber);
+		subscriberService.unsubscribe(eventToUnsubscribe.getId(), subscriber.getId());
+		events = subscriberService.findAllSubscribedEvents(subscriber.getId());
 		assertFalse(events.contains(eventToUnsubscribe));
 	}
 	
@@ -72,12 +72,12 @@ public class SubscriberServiceIntegrationTest extends AbstractIntegrationTest {
 	@Test
 	public void checkNullConstraintsSubscribe(){
 		try{
-			subscriberService.subscribe(new Event(), null, "");
+			subscriberService.subscribe(0L, null, "");
 			fail();
 		}catch(ConstraintViolationException e1){/*OK*/}
 		
 		try{
-			subscriberService.subscribe(null, new Subscriber(), "");
+			subscriberService.subscribe(null, 0L, "");
 			fail();
 		}catch(ConstraintViolationException e2){/*OK*/}
 	}
@@ -85,7 +85,7 @@ public class SubscriberServiceIntegrationTest extends AbstractIntegrationTest {
 	@Test
 	public void checkNullConstraintsUnsubscribe(){
 		try{
-			subscriberService.unsubscribe(new Event(), null);
+			subscriberService.unsubscribe(0L, null);
 			fail();
 		}catch(ConstraintViolationException e1){/*OK*/}
 		

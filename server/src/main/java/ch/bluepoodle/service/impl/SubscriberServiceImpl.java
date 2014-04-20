@@ -14,8 +14,9 @@ import ch.bluepoodle.domain.Event;
 import ch.bluepoodle.domain.EventState;
 import ch.bluepoodle.domain.QEvent;
 import ch.bluepoodle.domain.QSubscription;
-import ch.bluepoodle.domain.Subscriber;
 import ch.bluepoodle.domain.Subscription;
+import ch.bluepoodle.repository.EventRepository;
+import ch.bluepoodle.repository.SubscriberRepository;
 import ch.bluepoodle.repository.SubscriptionRepository;
 import ch.bluepoodle.service.SubscriberService;
 
@@ -30,32 +31,36 @@ public class SubscriberServiceImpl implements SubscriberService {
 	private EntityManager em;
 	@Autowired
 	private SubscriptionRepository subscriptionRepository;
+	@Autowired
+	private EventRepository eventRepository;
+	@Autowired
+	private SubscriberRepository subscriberRepository;
 	
 	@Override
-	public List<Event> findAllSubscribedEvents(Subscriber subscriber) {
+	public List<Event> findAllSubscribedEvents(Long subscriberId) {
 		QEvent event = QEvent.event;
 		QSubscription subscription = QSubscription.subscription;
 		JPAQuery query = new JPAQuery(em);
 		return query.distinct().from(event).join(event.subscriptions,subscription)
-				.where(subscription.pk.subscriber.id.eq(subscriber.getId()))
+				.where(subscription.pk.subscriber.id.eq(subscriberId))
 				.list(event);
 	}
 
 	@Override
-	public void subscribe(Event event, Subscriber subscriber, String comment) {
+	public void subscribe(Long eventId, Long subscriberId, String comment) {
 		Subscription subscription = new Subscription();
-		subscription.setEvent(event);
-		subscription.setSubscriber(subscriber);
+		subscription.setEvent(eventRepository.findOne(eventId));
+		subscription.setSubscriber(subscriberRepository.findOne(subscriberId));
 		subscription.setComment(comment);
 		subscriptionRepository.save(subscription);
 	}
 
 	@Override
-	public void unsubscribe(Event event, Subscriber subscriber) {
+	public void unsubscribe(Long eventId, Long subscriberId) {
 		QSubscription subscription = QSubscription.subscription;
 		HibernateDeleteClause delete = new HibernateDeleteClause(em.unwrap(Session.class), subscription);
-		delete.where(subscription.pk.event.eq(event)
-				.and(subscription.pk.subscriber.eq(subscriber)))
+		delete.where(subscription.pk.event.id.eq(eventId)
+				.and(subscription.pk.subscriber.id.eq(subscriberId)))
 				.execute();
 	}
 
