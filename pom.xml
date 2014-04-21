@@ -677,6 +677,12 @@
 			</dependency>
 
 			<dependency>
+				<groupId>ch.bluepoodle</groupId>
+				<artifactId>bluepoodle-test</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-framework-bom</artifactId>
 				<version>4.0.0.RELEASE</version>
@@ -825,6 +831,12 @@
 				<artifactId>testng</artifactId>
 				<version>${testng.version}</version>
 			</dependency>
+
+			<dependency>
+				<groupId>com.jayway.jsonpath</groupId>
+				<artifactId>json-path</artifactId>
+				<version>${jsonpath.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -858,6 +870,7 @@
 		<module>domain</module>
 		<module>server</module>
 		<module>frontend</module>
+		<module>test</module>
 	</modules>
 
 
@@ -887,6 +900,7 @@
 		<logback.version>1.1.2</logback.version>
 		<testng.version>6.8.7</testng.version>
 		<junit.version>4.11</junit.version>
+		<jsonpath.version>0.9.1</jsonpath.version>
 
 		<xbean-spring-version>3.11</xbean-spring-version>
 		<aspectj.version>1.7.4</aspectj.version>
