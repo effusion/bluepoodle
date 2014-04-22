@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,5 +35,12 @@ public class PublisherController {
     public List<Event> findById(@PathVariable("publisherId") final Long publisherId, final UriComponentsBuilder uriBuilder, final HttpServletResponse response) {
     	List<Event> events = publisherService.findAllEvents(publisherId);
     	return events;
+    }
+    
+    @RequestMapping(value = "/createevent/", method = RequestMethod.PUT)
+    @ResponseBody
+    public Event createEvent(@RequestBody Event event, final UriComponentsBuilder uriBuilder, final HttpServletResponse response) {
+    	Event generateEvent = publisherService.createEvent(event);
+    	return generateEvent;
     }
 }
