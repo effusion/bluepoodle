@@ -1,4 +1,4 @@
-package ch.bluepoodle.repository;
+package ch.bluepoodle.server.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

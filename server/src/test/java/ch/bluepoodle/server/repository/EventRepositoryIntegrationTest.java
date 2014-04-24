@@ -1,4 +1,4 @@
-package ch.bluepoodle.repository;
+package ch.bluepoodle.server.repository;
 
 import java.util.List;
 
@@ -10,9 +10,12 @@ import static org.testng.Assert.assertEquals;
 
 import org.testng.annotations.Test;
 
-import ch.bluepoodle.AbstractIntegrationTest;
 import ch.bluepoodle.domain.Event;
 import ch.bluepoodle.domain.QEvent;
+import ch.bluepoodle.server.AbstractIntegrationTest;
+import ch.bluepoodle.server.repository.EventRepository;
+import ch.bluepoodle.server.repository.EventTypeRepository;
+import ch.bluepoodle.server.repository.LocationRepository;
 
 import com.google.common.collect.Lists;
 import com.mysema.query.types.expr.BooleanExpression;

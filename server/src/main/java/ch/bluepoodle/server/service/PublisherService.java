@@ -1,4 +1,4 @@
-package ch.bluepoodle.service;
+package ch.bluepoodle.server.service;
 
 import java.util.List;
 

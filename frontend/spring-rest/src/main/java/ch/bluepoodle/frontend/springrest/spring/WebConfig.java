@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import ch.bluepoodle.config.ServerApplicationConfig;
+import ch.bluepoodle.server.config.ServerApplicationConfig;
 
 @Configuration
 @ComponentScan("ch.bluepoodle.frontend.springrest.controller")

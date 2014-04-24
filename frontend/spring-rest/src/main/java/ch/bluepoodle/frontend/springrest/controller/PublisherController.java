@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import ch.bluepoodle.domain.Event;
-import ch.bluepoodle.service.PublisherService;
+import ch.bluepoodle.server.service.PublisherService;
 
 @Controller
 @RequestMapping(value = "/publisher")

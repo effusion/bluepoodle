@@ -1,4 +1,4 @@
-package ch.bluepoodle.aspect;
+package ch.bluepoodle.server.aspect;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;

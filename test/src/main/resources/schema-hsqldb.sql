@@ -51,8 +51,8 @@
 
     create table Subscription (
         comment varchar(255),
-        event_id bigint,
         subscriber_id bigint,
+        event_id bigint,
         primary key (event_id, subscriber_id)
     );
 
@@ -89,14 +89,14 @@
         references Publisher;
 
     alter table Subscription 
-        add constraint FK_p9cfmjk7ep69h3su4lk8px19p 
-        foreign key (event_id) 
-        references Event;
-
-    alter table Subscription 
         add constraint FK_kr6rb2hqvfff55erc7iejv3sl 
         foreign key (subscriber_id) 
         references Subscriber;
+
+    alter table Subscription 
+        add constraint FK_p9cfmjk7ep69h3su4lk8px19p 
+        foreign key (event_id) 
+        references Event;
 
     alter table eventtype_location_assoc 
         add constraint FK_23p1ksysesybtdi1t74r30tj2 

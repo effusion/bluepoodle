@@ -1,4 +1,4 @@
-package ch.bluepoodle.repository;
+package ch.bluepoodle.server.repository;
 
 import org.testng.Assert;
 
@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.testng.annotations.Test;
 
-import ch.bluepoodle.AbstractIntegrationTest;
 import ch.bluepoodle.domain.Subscriber;
-import ch.bluepoodle.repository.SubscriberRepository;
+import ch.bluepoodle.server.AbstractIntegrationTest;
+import ch.bluepoodle.server.repository.SubscriberRepository;
 
 @Transactional
 public class SubscriberRepositoryIntegrationTest extends AbstractIntegrationTest {

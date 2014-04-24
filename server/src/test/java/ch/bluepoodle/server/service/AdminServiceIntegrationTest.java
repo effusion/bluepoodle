@@ -1,4 +1,4 @@
-package ch.bluepoodle.service;
+package ch.bluepoodle.server.service;
 
 
 import static org.testng.Assert.assertEquals;
@@ -9,15 +9,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.Test;
 
-import ch.bluepoodle.AbstractIntegrationTest;
 import ch.bluepoodle.domain.Event;
 import ch.bluepoodle.domain.EventType;
 import ch.bluepoodle.domain.Publisher;
-import ch.bluepoodle.repository.EventRepository;
-import ch.bluepoodle.repository.EventTypeRepository;
-import ch.bluepoodle.repository.LocationRepository;
-import ch.bluepoodle.repository.PublisherRepository;
-import ch.bluepoodle.service.PublisherService;
+import ch.bluepoodle.server.AbstractIntegrationTest;
+import ch.bluepoodle.server.repository.EventRepository;
+import ch.bluepoodle.server.repository.EventTypeRepository;
+import ch.bluepoodle.server.repository.LocationRepository;
+import ch.bluepoodle.server.repository.PublisherRepository;
+import ch.bluepoodle.server.service.PublisherService;
 
 public class AdminServiceIntegrationTest extends AbstractIntegrationTest {
 	

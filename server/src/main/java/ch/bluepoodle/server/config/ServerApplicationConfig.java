@@ -1,4 +1,4 @@
-package ch.bluepoodle.config;
+package ch.bluepoodle.server.config;
 
 import javax.sql.DataSource;
 

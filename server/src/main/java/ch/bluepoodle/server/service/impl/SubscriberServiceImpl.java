@@ -1,4 +1,4 @@
-package ch.bluepoodle.service.impl;
+package ch.bluepoodle.server.service.impl;
 
 import java.util.List;
 
@@ -15,10 +15,10 @@ import ch.bluepoodle.domain.EventState;
 import ch.bluepoodle.domain.QEvent;
 import ch.bluepoodle.domain.QSubscription;
 import ch.bluepoodle.domain.Subscription;
-import ch.bluepoodle.repository.EventRepository;
-import ch.bluepoodle.repository.SubscriberRepository;
-import ch.bluepoodle.repository.SubscriptionRepository;
-import ch.bluepoodle.service.SubscriberService;
+import ch.bluepoodle.server.repository.EventRepository;
+import ch.bluepoodle.server.repository.SubscriberRepository;
+import ch.bluepoodle.server.repository.SubscriptionRepository;
+import ch.bluepoodle.server.service.SubscriberService;
 
 import com.mysema.query.jpa.hibernate.HibernateDeleteClause;
 import com.mysema.query.jpa.impl.JPAQuery;

@@ -1,4 +1,4 @@
-package ch.bluepoodle.repository;
+package ch.bluepoodle.server.repository;
 
 import static org.testng.AssertJUnit.assertEquals;
 
@@ -11,9 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.testng.annotations.Test;
 
 import ch.bluepoodle.domain.QPublisher;
-import ch.bluepoodle.AbstractIntegrationTest;
 import ch.bluepoodle.domain.Publisher;
-import ch.bluepoodle.repository.PublisherRepository;
+import ch.bluepoodle.server.AbstractIntegrationTest;
+import ch.bluepoodle.server.repository.PublisherRepository;
 
 import com.mysema.query.types.expr.BooleanExpression;
 
