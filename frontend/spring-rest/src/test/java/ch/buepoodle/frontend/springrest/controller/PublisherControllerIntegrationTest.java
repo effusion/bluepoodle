@@ -37,7 +37,7 @@ public class PublisherControllerIntegrationTest extends AbstractIntegrationTest 
     			.andExpect(jsonPath("$[0].id", is(1)))
     			.andExpect(jsonPath("$[0].name", is("JavaOne")));
     }
-    @Test(enabled=true)
+    @Test(enabled=false)
     public void createEvent() throws Exception {
     	Event event = new Event();
     	String eventName = "JavaLand";
