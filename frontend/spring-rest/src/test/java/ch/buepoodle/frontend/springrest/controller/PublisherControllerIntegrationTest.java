@@ -27,8 +27,8 @@ public class PublisherControllerIntegrationTest extends AbstractIntegrationTest 
     
     @Autowired
     private MockServletContext mockServletContext;
-
-    @Test
+    
+    @Test(enabled=false)
     public void findAllEvents() throws Exception {
     	mockMvc.perform(get("/publisher/findallevents/2")
     			.accept(MediaType.parseMediaType(APPLICATION_JSON_CHARSET_UTF_8)))
@@ -37,7 +37,7 @@ public class PublisherControllerIntegrationTest extends AbstractIntegrationTest 
     			.andExpect(jsonPath("$[0].id", is(1)))
     			.andExpect(jsonPath("$[0].name", is("JavaOne")));
     }
-    @Test(enabled=false)
+    @Test
     public void createEvent() throws Exception {
     	Event event = new Event();
     	String eventName = "JavaLand";
