@@ -75,19 +75,19 @@ public class PublisherServiceIntegrationTest extends AbstractIntegrationTest {
 	
 	@Test
 	public void deleteEvent(){
-		publisherService.deleteEvent(eventRepository.findOne(3L).getId(), publisher.getId());
-		assertNull(eventRepository.findOne(3L));
+		publisherService.deleteEvent(eventRepository.findOne(18L).getId(), publisher.getId());
+		assertNull(eventRepository.findOne(18L));
 	}
 	
 	@Test
 	public void createEvent(){
 		Event event = new Event();
-		EventType eventType = eventTypeRepository.findOne(1L);
+		EventType eventType = eventTypeRepository.findOne(16L);
 		event.setEventType(eventType);
 		event.setPublisher(publisher);
 		String name = "JavaLand";
 		event.setName(name);
-		event.setLocation(locationRepository.findOne(4L));
+		event.setLocation(locationRepository.findOne(14L));
 		event = publisherService.createEvent(event);
 		assertEquals(event.getName(),name);
 		publisherService.deleteEvent(event.getId(), publisher.getId());
@@ -99,7 +99,7 @@ public class PublisherServiceIntegrationTest extends AbstractIntegrationTest {
 		Event event = events.get(0);
 		List<Subscriber> subscribers = publisherService.findAllSubscribers(event.getId());
 		assertFalse(subscribers.isEmpty());
-		Subscriber excpectedSubscriber = subscriberRepository.findOne(4L);
+		Subscriber excpectedSubscriber = subscriberRepository.findOne(8L);
 		assertTrue(subscribers.contains(excpectedSubscriber));
 	}
 	
@@ -107,7 +107,7 @@ public class PublisherServiceIntegrationTest extends AbstractIntegrationTest {
 	public void addSubscriberToEvent(){
 		List<Event> events = publisherService.findAllEvents(publisher.getId());
 		Event event = events.get(0);
-		Subscriber subscriber = subscriberRepository.findOne(3L);
+		Subscriber subscriber = subscriberRepository.findOne(7L);
 		List<Subscriber> subscribers = publisherService.findAllSubscribers(event.getId());
 		int subscriberCount = subscribers.size();
 		publisherService.addSubscriberToEvent(event.getId(),subscriber.getId(), "Geh mal hin und lern was!");

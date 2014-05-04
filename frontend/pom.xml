@@ -15,6 +15,7 @@
 
 	<modules>
 		<module>spring-rest</module>
+		<module>vaadin</module>
 	</modules>
 	
 </project>

@@ -30,7 +30,6 @@ public class TestServerApplicationConfig {
 	public DataSource dataSource() {
 		EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
 		return builder.setType(EmbeddedDatabaseType.HSQL)
-				.addScript("classpath:sequence.sql")
 				.addScript("classpath:schema-hsqldb.sql")
 				.addScript("classpath:test-data.sql").build();
 	}

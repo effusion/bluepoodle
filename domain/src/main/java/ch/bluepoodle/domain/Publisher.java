@@ -1,5 +1,6 @@
 package ch.bluepoodle.domain;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -11,7 +12,7 @@ public class Publisher extends Person {
 	@OneToMany(mappedBy = "publisher")
 	private Set<EventType> eventTypes;
 	@OneToMany(mappedBy = "publisher")
-	private Set<Event> events;
+	private Set<Event> events = new HashSet<Event>();
 
 	public Set<Event> getEvents() {
 		return events;
@@ -27,5 +28,9 @@ public class Publisher extends Person {
 
 	public void setEventTypes(Set<EventType> eventTypes) {
 		this.eventTypes = eventTypes;
+	}
+	
+	public void addEvent(Event event){
+		events.add(event);
 	}
 }

@@ -1,0 +1,7 @@
+/target
+/*.log
+/test-output
+/.classpath
+/.project
+/.settings
+/src/main/webapp/VAADIN/widgetsets

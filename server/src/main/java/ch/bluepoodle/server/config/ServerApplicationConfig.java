@@ -21,8 +21,8 @@ import org.springframework.validation.beanvalidation.MethodValidationPostProcess
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan({ "ch.bluepoodle" })
-@EnableJpaRepositories(basePackages = { "ch.bluepoodle.repository" })
+@ComponentScan({ "ch.bluepoodle.server.service","ch.bluepoodle.server.aspect" })
+@EnableJpaRepositories(basePackages = { "ch.bluepoodle.server.repository" })
 @EnableAspectJAutoProxy
 public class ServerApplicationConfig {
 

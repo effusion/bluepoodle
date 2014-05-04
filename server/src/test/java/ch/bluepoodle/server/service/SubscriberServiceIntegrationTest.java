@@ -32,8 +32,8 @@ public class SubscriberServiceIntegrationTest extends AbstractIntegrationTest {
 	
 	@BeforeMethod
 	public void beforeClass(){
-		subscriber = subscriberRepository.findOne(1L);
-		event = eventRepository.findOne(1L);	
+		subscriber = subscriberRepository.findOne(5L);
+		event = eventRepository.findOne(16L);	
 	}
 	
 	@Test
@@ -51,7 +51,7 @@ public class SubscriberServiceIntegrationTest extends AbstractIntegrationTest {
 	
 	@Test
 	public void unsubscribeFromEvent(){
-		subscriber = subscriberRepository.findOne(4L);
+		subscriber = subscriberRepository.findOne(8L);
 		List<Event> events = subscriberService.findAllSubscribedEvents(subscriber.getId());
 		Event eventToUnsubscribe = events.get(0);
 		subscriberService.unsubscribe(eventToUnsubscribe.getId(), subscriber.getId());

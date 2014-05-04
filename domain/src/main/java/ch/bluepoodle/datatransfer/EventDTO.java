@@ -9,29 +9,15 @@ public class EventDTO extends BaseDTO {
 	private static final long serialVersionUID = 4786942822061836258L;
 	
 	private Long eventTypeId;
-	
 	private Long locationId;
-	
 	private String name;
-	
 	private LocalDateTime startDate;
-	
 	private LocalDateTime endDate;
-	
 	private EventState state;
 	
 	public EventDTO(){
 		super();
 		state = EventState.PLANNED;
-	}
-
-	public Long getEventType() {
-		return eventTypeId;
-	}
-
-
-	public Long getLocation() {
-		return locationId;
 	}
 
 	public String getName() {
@@ -72,5 +58,21 @@ public class EventDTO extends BaseDTO {
 	
 	public EventState getState(){
 		return state;
+	}
+	
+	public Long getLocationId() {
+		return locationId;
+	}
+
+	public void setLocationId(Long locationId) {
+		this.locationId = locationId;
+	}
+
+	public Long getEventTypeId() {
+		return eventTypeId;
+	}
+
+	public void setEventTypeId(Long eventTypeId) {
+		this.eventTypeId = eventTypeId;
 	}
 }

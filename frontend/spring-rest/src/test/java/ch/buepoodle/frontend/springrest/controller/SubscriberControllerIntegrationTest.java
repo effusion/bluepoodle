@@ -2,54 +2,36 @@ package ch.buepoodle.frontend.springrest.controller;
 
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockServletContext;
 import org.testng.annotations.Test;
 
-import ch.bluepoodle.domain.Event;
-import ch.bluepoodle.server.service.PublisherService;
+import ch.bluepoodle.server.service.SubscriberService;
 import ch.buepoodle.frontend.springrest.AbstractIntegrationTest;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-public class PublisherControllerIntegrationTest extends AbstractIntegrationTest {
+public class SubscriberControllerIntegrationTest extends AbstractIntegrationTest {
 	
 	private static final String APPLICATION_JSON_CHARSET_UTF_8 = "application/json;charset=UTF-8";
 	
 	@Autowired
-	private PublisherService publisherService;
+	private SubscriberService subscriberService;
     
     @Autowired
     private MockServletContext mockServletContext;
     
     @Test
     public void findAllEvents() throws Exception {
-    	mockMvc.perform(get("/publisher/findallevents/2")
+    	mockMvc.perform(get("/subscriber/findallaubscribedevents/8")
     			.accept(MediaType.parseMediaType(APPLICATION_JSON_CHARSET_UTF_8)))
     			.andExpect(status().isOk())
     			.andExpect(content().contentType(APPLICATION_JSON_CHARSET_UTF_8))
     			.andExpect(jsonPath("$[0].id", is(16)))
     			.andExpect(jsonPath("$[0].name", is("JavaOne")));
     }
-    @Test
-    public void createEvent() throws Exception {
-    	Event event = new Event();
-    	String eventName = "JavaLand";
-		event.setName(eventName);
-		ObjectMapper mapper = new ObjectMapper();
-		String json = mapper.writeValueAsString(event);    	
-    	mockMvc.perform(put("/publisher/createevent/")
-    			.contentType(MediaType.APPLICATION_JSON)
-    			.content(json))
-    			.andExpect(status().isOk());
-    }
+
 }

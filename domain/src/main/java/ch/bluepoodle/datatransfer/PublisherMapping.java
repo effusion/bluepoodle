@@ -1,7 +1,5 @@
 package ch.bluepoodle.datatransfer;
 
-import static org.dozer.loader.api.FieldsMappingOptions.copyByReference;
-
 import org.dozer.loader.api.BeanMappingBuilder;
 import org.dozer.loader.api.TypeMappingOptions;
 
@@ -11,9 +9,7 @@ public class PublisherMapping extends BeanMappingBuilder {
 
 	@Override
 	protected void configure() {
-		mapping(Publisher.class, PublisherDTO.class, TypeMappingOptions.oneWay())
-		.fields("id", "id", copyByReference());
-
+		mapping(Publisher.class, PublisherDTO.class, TypeMappingOptions.oneWay());
 	}
 
 }
