@@ -31,11 +31,6 @@ public class MyVaadinUI extends UI{
 	@Autowired
 	private PublisherService publisherService;
 	
-    @WebServlet(value = "/*", asyncSupported = true)
-    @VaadinServletConfiguration(productionMode = false, ui = MyVaadinUI.class)
-    public static class Servlet extends VaadinServlet {
-    }
-
     @Override
     protected void init(VaadinRequest request) {
         final VerticalLayout layout = new VerticalLayout();
