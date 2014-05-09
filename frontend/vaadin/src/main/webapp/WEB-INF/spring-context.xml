@@ -6,11 +6,11 @@
 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
     <context:annotation-config/>
-    <context:component-scan base-package="ch.bluepoodle.vaadin.ui"/>
+    <context:component-scan base-package="ch.bluepoodle.vaadin"/>
     
     <bean class="ch.bluepoodle.server.config.ServerApplicationConfig"/>
-
-
+    
+ 
 <!--     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource"> -->
 <!--         <property name="basename" value="classpath:/locales/messages"/> -->
 <!--         Do not use System Locale file as default. Windows & Linux could have different default locale -->

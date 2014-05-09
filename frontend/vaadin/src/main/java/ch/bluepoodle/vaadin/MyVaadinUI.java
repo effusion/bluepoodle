@@ -1,22 +1,18 @@
-package ch.bluepoodle.vaadin.ui;
+package ch.bluepoodle.vaadin;
 
 import java.util.List;
 
-import javax.servlet.ServletContext;
-import javax.servlet.annotation.WebServlet;
+
+
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import ch.bluepoodle.server.service.PublisherService;
 
-import com.vaadin.annotations.Theme;
-import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
-import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Label;
@@ -28,6 +24,11 @@ import com.vaadin.ui.VerticalLayout;
 @Scope("prototype")
 public class MyVaadinUI extends UI{
 	
+	private static final long serialVersionUID = -6169543319998150557L;
+
+	@Autowired
+	private transient ApplicationContext applicationContext;
+	
 	@Autowired
 	private PublisherService publisherService;
 	
@@ -36,14 +37,12 @@ public class MyVaadinUI extends UI{
         final VerticalLayout layout = new VerticalLayout();
         layout.setMargin(true);
         setContent(layout);
-        
-//        List<ch.bluepoodle.domain.Event> events = publisherService.findAllEvents(2L);
-//        Table table = new Table("Event Table");
-//        table.addContainerProperty("Name", String.class , null);
-//        for (ch.bluepoodle.domain.Event event : events) {
-//			table.addItem(event.getName());
-//		}
-        
+        List<ch.bluepoodle.domain.Event> events = publisherService.findAllEvents(2L);
+        Table table = new Table("My organized events");
+        table.addContainerProperty("Eventname", String.class, null);
+        for (ch.bluepoodle.domain.Event event : events) {
+			table.addItem(new Object[]{event.getName()},event.getId());
+		}
         
         Button button = new Button("Click Me");
         button.addClickListener(new Button.ClickListener() {
@@ -52,7 +51,7 @@ public class MyVaadinUI extends UI{
             }
         });
         layout.addComponent(button);
-        //layout.addComponent(table);
+        layout.addComponent(table);
     }
 
 }
