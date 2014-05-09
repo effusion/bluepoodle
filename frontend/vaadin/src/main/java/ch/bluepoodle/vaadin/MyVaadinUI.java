@@ -2,9 +2,6 @@ package ch.bluepoodle.vaadin;
 
 import java.util.List;
 
-
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
@@ -13,8 +10,7 @@ import org.springframework.stereotype.Component;
 import ch.bluepoodle.server.service.PublisherService;
 
 import com.vaadin.server.VaadinRequest;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.UI;
@@ -30,28 +26,36 @@ public class MyVaadinUI extends UI{
 	private transient ApplicationContext applicationContext;
 	
 	@Autowired
-	private PublisherService publisherService;
+	private transient PublisherService publisherService;
 	
     @Override
     protected void init(VaadinRequest request) {
-        final VerticalLayout layout = new VerticalLayout();
-        layout.setMargin(true);
-        setContent(layout);
+    	final HorizontalLayout header = new HorizontalLayout();
+    	final VerticalLayout parent = new VerticalLayout();
+    	final VerticalLayout body = new VerticalLayout();
+    	
+    	
+    	header.setSizeFull();
+    	Label text = new Label("Bluepoode");
+    	header.setMargin(true);
+    	setContent(header);
+    	header.addComponent(text);
+       
+    	body.setMargin(true);
+        setContent(parent);
         List<ch.bluepoodle.domain.Event> events = publisherService.findAllEvents(2L);
         Table table = new Table("My organized events");
+        table.setSelectable(true);
+        table.setNullSelectionAllowed(true);
         table.addContainerProperty("Eventname", String.class, null);
+        table.addContainerProperty("Location", String.class, null);
         for (ch.bluepoodle.domain.Event event : events) {
-			table.addItem(new Object[]{event.getName()},event.getId());
+			table.addItem(new Object[]{event.getName(),event.getLocation().getName()},event.getId());
 		}
         
-        Button button = new Button("Click Me");
-        button.addClickListener(new Button.ClickListener() {
-            public void buttonClick(ClickEvent event) {
-                layout.addComponent(new Label("Thank you for clicking"));
-            }
-        });
-        layout.addComponent(button);
-        layout.addComponent(table);
+        body.addComponent(table);
+        parent.addComponent(header);
+    	parent.addComponent(body);
     }
 
 }
