@@ -14,9 +14,9 @@
 	</organization>
 
 	<scm>
-		<connection>scm:svn:https://astra3.ait-ch.ch/tm-bluepoodle/trunk/server/</connection>
-		<developerConnection>scm:svn:https://astra3.ait-ch.ch/tm-bluepoodle/trunk/server/</developerConnection>
-		<url>https://astra3.ait-ch.ch/tm-bluepoodle/trunk/server/</url>
+		<connection>scm:git:https://github.com/effusion/bluepoodle</connection>
+		<developerConnection>scm:git:https://github.com/effusion/bluepoodle</developerConnection>
+		<url>https://github.com/effusion/bluepoodle</url>
 	</scm>
 
 	<prerequisites>
