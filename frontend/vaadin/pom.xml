@@ -51,7 +51,7 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
@@ -94,6 +94,15 @@
 			<artifactId>vaadin-themes</artifactId>
 			<version>${vaadin.version}</version>
 		</dependency>
+
+		<!-- Addons -->
+		<dependency>
+			<groupId>org.vaadin.addons</groupId>
+			<artifactId>wizards-for-vaadin</artifactId>
+			<version>1.1.0</version>
+		</dependency>
+
+
 		<dependency>
 			<groupId>ru.xpoft.vaadin</groupId>
 			<artifactId>spring-vaadin-integration</artifactId>

@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 import ch.bluepoodle.server.service.PublisherService;
 
 import com.vaadin.server.VaadinRequest;
+import com.vaadin.ui.Alignment;
+import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Table;
@@ -33,7 +35,15 @@ public class MyVaadinUI extends UI{
     	final HorizontalLayout header = new HorizontalLayout();
     	final VerticalLayout parent = new VerticalLayout();
     	final VerticalLayout body = new VerticalLayout();
+    	final VerticalLayout navigations = new VerticalLayout();
     	
+    	Button viewEvents = new Button();
+    	Button createEvent = new Button();
+    	Button viewEventTyps = new Button();
+    	
+    	navigations.addComponent(viewEvents);
+    	navigations.addComponent(createEvent);
+    	navigations.addComponent(viewEventTyps);
     	
     	header.setSizeFull();
     	Label text = new Label("Bluepoode");
@@ -42,6 +52,7 @@ public class MyVaadinUI extends UI{
     	header.addComponent(text);
        
     	body.setMargin(true);
+    	
         setContent(parent);
         List<ch.bluepoodle.domain.Event> events = publisherService.findAllEvents(2L);
         Table table = new Table("My organized events");
@@ -53,9 +64,13 @@ public class MyVaadinUI extends UI{
 			table.addItem(new Object[]{event.getName(),event.getLocation().getName()},event.getId());
 		}
         
+        
         body.addComponent(table);
         parent.addComponent(header);
+        parent.addComponent(navigations);
+        parent.setComponentAlignment(navigations, Alignment.MIDDLE_CENTER);
     	parent.addComponent(body);
+    	parent.setComponentAlignment(body, Alignment.MIDDLE_CENTER);
     }
 
 }
