@@ -5,3 +5,5 @@
 /.project
 /.settings
 /src/main/webapp/VAADIN/widgetsets
+/.idea
+/*.iml

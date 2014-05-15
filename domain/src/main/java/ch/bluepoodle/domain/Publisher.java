@@ -33,4 +33,11 @@ public class Publisher extends Person {
 	public void addEvent(Event event){
 		events.add(event);
 	}
+
+	@Override
+	public String toString() {
+		return getFirstName() +" "+getLastName();
+	}
+	
+	
 }
