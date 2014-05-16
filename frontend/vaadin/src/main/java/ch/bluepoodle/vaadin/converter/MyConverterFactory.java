@@ -16,16 +16,7 @@ public class MyConverterFactory extends DefaultConverterFactory {
     protected <PRESENTATION, MODEL> Converter<PRESENTATION, MODEL> findConverter(
             Class<PRESENTATION> presentationType, Class<MODEL> modelType) {
         // Handle String <-> Double
-        if (presentationType == String.class && modelType == EventType.class) {
-            return (Converter<PRESENTATION, MODEL>) new EventTypeConverter();
-        }
-        if (presentationType == String.class && modelType == Location.class) {
-            return (Converter<PRESENTATION, MODEL>) new LocationConverter();
-        }
-        if (presentationType == String.class && modelType == Publisher.class) {
-            return (Converter<PRESENTATION, MODEL>) new PublisherConverter();
-        }
-        
+
         if (presentationType == String.class && modelType == EventState.class) {
             return (Converter<PRESENTATION, MODEL>) new EventStateConverter();
         }

@@ -1,4 +1,4 @@
-package ch.bluepoodle.frontend.springrest.util;
+package ch.bluepoodle.util;
 
 import java.util.ArrayList;
 import java.util.List;

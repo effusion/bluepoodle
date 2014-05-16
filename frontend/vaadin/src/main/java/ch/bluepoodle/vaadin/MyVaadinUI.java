@@ -1,27 +1,22 @@
 package ch.bluepoodle.vaadin;
 
-import java.util.List;
-
+import ch.bluepoodle.datatransfer.EventDTO;
+import ch.bluepoodle.datatransfer.EventMapping;
+import ch.bluepoodle.server.service.PublisherService;
+import ch.bluepoodle.util.MapperUtil;
+import ch.bluepoodle.vaadin.converter.MyConverterFactory;
+import com.vaadin.annotations.Theme;
+import com.vaadin.data.util.BeanItemContainer;
+import com.vaadin.server.VaadinRequest;
+import com.vaadin.server.VaadinSession;
+import com.vaadin.ui.*;
+import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import ch.bluepoodle.server.service.PublisherService;
-import ch.bluepoodle.vaadin.converter.EventTypeConverter;
-import ch.bluepoodle.vaadin.converter.MyConverterFactory;
-
-import com.vaadin.annotations.Theme;
-import com.vaadin.data.util.BeanItemContainer;
-import com.vaadin.server.VaadinRequest;
-import com.vaadin.server.VaadinSession;
-import com.vaadin.ui.Alignment;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.GridLayout;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.Table;
-import com.vaadin.ui.UI;
-import com.vaadin.ui.VerticalLayout;
+import java.util.List;
 
 @Component
 @Scope("prototype")
@@ -35,9 +30,12 @@ public class MyVaadinUI extends UI{
 	
 	@Autowired
 	private transient PublisherService publisherService;
+
+    DozerBeanMapper mapper = new DozerBeanMapper();
 	
     @Override
     protected void init(VaadinRequest request) {
+        mapper.addMapping(new EventMapping());
     	VaadinSession.getCurrent().setConverterFactory(new MyConverterFactory());
     	final VerticalLayout parent = new VerticalLayout();
     	final GridLayout grid = new GridLayout(2, 3);
@@ -61,13 +59,14 @@ public class MyVaadinUI extends UI{
     	
       
         List<ch.bluepoodle.domain.Event> events = publisherService.findAllEvents(2L);
+        List<EventDTO> mappedEvents = MapperUtil.map(mapper, events, EventDTO.class);
         Table table = new Table();
         table.setSelectable(true);
         table.setNullSelectionAllowed(true);
         table.addContainerProperty("Eventname", String.class, null);
         table.addContainerProperty("Location", String.class, null);
-        BeanItemContainer<ch.bluepoodle.domain.Event> beans = new BeanItemContainer<ch.bluepoodle.domain.Event>(ch.bluepoodle.domain.Event.class);
-        beans.addAll(events);
+        BeanItemContainer<EventDTO> beans = new BeanItemContainer<>(EventDTO.class);
+        beans.addAll(mappedEvents);
         table.setContainerDataSource(beans);
         table.setEditable(true);
         grid.addComponent(table,1,1);

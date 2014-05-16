@@ -16,7 +16,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import ch.bluepoodle.datatransfer.EventDTO;
 import ch.bluepoodle.domain.Event;
-import ch.bluepoodle.frontend.springrest.util.MapperUtil;
+import ch.bluepoodle.util.MapperUtil;
 import ch.bluepoodle.server.service.SubscriberService;
 
 @Controller

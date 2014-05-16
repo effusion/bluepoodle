@@ -20,12 +20,12 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     public WebConfig() {
         super();
     }
-    
+
     @Bean
     public DozerBeanMapper eventMapping(){
     	DozerBeanMapper mapper = new DozerBeanMapper();
 		mapper.addMapping(new EventMapping());
     	return mapper;
     }
-    
+
 }
