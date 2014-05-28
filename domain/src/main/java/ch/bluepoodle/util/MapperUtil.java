@@ -6,9 +6,9 @@ import java.util.List;
 import org.dozer.Mapper;
 
 public class MapperUtil {
-	public static <T, U> List<U> map(final Mapper mapper, final List<T> source, final Class<U> destType) {
-		final List<U> dest = new ArrayList<>();
-		for (T element : source) {
+	public static <SRC, DEST> List<DEST> map(final Mapper mapper, final List<SRC> source, final Class<DEST> destType) {
+		final List<DEST> dest = new ArrayList<>();
+		for (SRC element : source) {
 	        dest.add(mapper.map(element, destType));
 	    }
 	    return dest;

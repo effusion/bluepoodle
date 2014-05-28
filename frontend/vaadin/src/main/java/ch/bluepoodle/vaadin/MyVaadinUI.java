@@ -31,7 +31,7 @@ public class MyVaadinUI extends UI{
 	@Autowired
 	private transient PublisherService publisherService;
 
-    DozerBeanMapper mapper = new DozerBeanMapper();
+    private DozerBeanMapper mapper = new DozerBeanMapper();
 	
     @Override
     protected void init(VaadinRequest request) {
