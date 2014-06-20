@@ -38,24 +38,17 @@ public class MyVaadinUI extends UI{
         mapper.addMapping(new EventMapping());
     	VaadinSession.getCurrent().setConverterFactory(new MyConverterFactory());
     	final VerticalLayout parent = new VerticalLayout();
-    	final GridLayout grid = new GridLayout(2, 3);
-    	final VerticalLayout navigation = new VerticalLayout();
-    	
-    	
-    	Button viewEvents = new Button("Test");
-    	Button createEvent = new Button("Test");
-    	Button viewEventTyps = new Button("Test");
-    
-    	
-    	navigation.addComponent(viewEvents);
-    	navigation.addComponent(createEvent);
-    	navigation.addComponent(viewEventTyps);
-    	
+        final VerticalLayout navigation = new VerticalLayout();
+    	final VerticalLayout selection = new VerticalLayout();
+        final VerticalLayout detail = new VerticalLayout();
+
+        Label event = new Label("Event");
+        event.setStyleName("v-label-poodle-header");
+        navigation.addComponent(event);
     	
     	Label text = new Label("Bluepoodle");
     	text.setStyleName("v-label-poodle-header");
-    	grid.addComponent(text, 0, 0, 1, 0);
-    	grid.addComponent(navigation,0,1);     
+    	parent.addComponent(text);
     	
       
         List<ch.bluepoodle.domain.Event> events = publisherService.findAllEvents(2L);
@@ -63,15 +56,14 @@ public class MyVaadinUI extends UI{
         Table table = new Table();
         table.setSelectable(true);
         table.setNullSelectionAllowed(true);
-        table.addContainerProperty("Eventname", String.class, null);
-        table.addContainerProperty("Location", String.class, null);
         BeanItemContainer<EventDTO> beans = new BeanItemContainer<>(EventDTO.class);
         beans.addAll(mappedEvents);
         table.setContainerDataSource(beans);
         table.setEditable(true);
-        grid.addComponent(table,1,1);
-        parent.addComponent(grid);
-        parent.setComponentAlignment(grid, Alignment.MIDDLE_CENTER);
+        selection.addComponent(table);
+        parent.addComponent(navigation);
+        parent.addComponent(selection);
+        parent.setComponentAlignment(selection, Alignment.MIDDLE_CENTER);
         setContent(parent);
     }
 
